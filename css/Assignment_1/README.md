@@ -40,11 +40,11 @@ The purpose of this clone is to practice **HTML structure, form handling, and mo
 
 ## 🧩 Folder Structure
 
-Saylani-Assignment/
+Saylani-Assignment/    
 │
-├── css/
-│ ├── Assignment_1/
-│ │ ├── index.html
-│ │ └── style.css
-│
-└── README.md
+├── css/    
+│ ├── Assignment_1/  
+│ │ ├── index.html  
+│ │ └── style.css  
+│  
+└── README.md  
