@@ -7,7 +7,7 @@ This project demonstrates a clean and professional UI layout featuring navigatio
 
 ## 🚀 Live Demo
 
-🔗 **View Project:** [Click Here to Visit the Live Page](YOUR_DEPLOYMENT_LINK_HERE)
+🔗 **View Project:** [Click Here to Visit the Live Page](https://usmanameen45.github.io/Saylani-Assignment/css/Assignment_2/index.html)
 
 *(Replace the above link with your GitHub Pages or hosting link.)*
 
