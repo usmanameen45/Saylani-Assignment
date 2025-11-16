@@ -1,159 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>SMIT Assignments</title>
-    <style>
-      /* --- Reset and Base --- */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
-      }
 
-      body {
-        background: #f4f4f6;
-        color: #1f1f1f;
-        line-height: 1.6;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        min-height: 100vh;
-        padding: 40px 20px;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMIT Assignments</title>
+  <link rel="stylesheet" href="sty.css">
+</head>
 
-      /* --- Header --- */
-      h1 {
-        font-size: 2.8rem;
-        color: #0d1b2a;
-        margin-bottom: 40px;
-        letter-spacing: 1px;
-        border-bottom: 3px solid #e0b400;
-        padding-bottom: 10px;
-      }
+<body>
+  <h1>SMIT Assignments</h1>
+  <div class="container">
 
-      /* --- Container --- */
-      .container {
-        width: 100%;
-        max-width: 800px;
-        background: #ffffff;
-        padding: 30px 40px;
-        border-radius: 16px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-        display: flex;
-        flex-direction: column;
-        gap: 40px;
-        transition: all 0.3s ease;
-      }
-
-      .container:hover {
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-      }
-
-      /* --- Row Section --- */
-      .row {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-
-      /* --- Column Section --- */
-      .column {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        gap: 20px;
-      }
-
-      h3 {
-        font-size: 1.6rem;
-        color: #0d1b2a;
-        margin-bottom: 15px;
-        position: relative;
-      }
-
-      h3::after {
-        content: "";
-        display: block;
-        height: 3px;
-        width: 50px;
-        background-color: #e0b400;
-        margin: 8px auto 0;
-        border-radius: 2px;
-      }
-
-      /* --- Buttons --- */
-      .column button {
-        background-color: #0d1b2a;
-        color: #ffffff;
-        border: none;
-        padding: 12px 25px;
-        border-radius: 8px;
-        font-size: 1rem;
-        cursor: pointer;
-        letter-spacing: 0.5px;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 10px rgba(13, 27, 42, 0.2);
-      }
-
-      .column button:hover {
-        background-color: #e0b400;
-        color: #0d1b2a;
-        transform: translateY(-3px);
-        box-shadow: 0 6px 15px rgba(224, 180, 0, 0.3);
-      }
-
-      a {
-        text-decoration: none;
-      }
-
-      /* --- Responsive Design --- */
-      @media (max-width: 600px) {
-        h1 {
-          font-size: 2.2rem;
-        }
-
-        .container {
-          padding: 25px;
-        }
-
-        .column button {
-          width: 100%;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <h1>SMIT Assignments</h1>
-    <div class="container">
+    <div class="column">
+      <h3>HTML</h3>
       <div class="row">
-        <h3>HTML</h3>
-        <div class="column">
-          <a href="./HTML/Assignment_1/index.html">
-            <button>Linking in HTML</button>
-          </a>
-        </div>
-      </div>
-
-      <div class="row">
-        <h3>CSS</h3>
-        <div class="column">
-          <a href="./css/Assignment_1/index.html">
-            <button>Google Signup Form</button>
-          </a>
-           <a href="./css/Assignment_2/index.html">
-            <button>UPPER webpage</button>
-          </a>
-          <a href="./css/Assignment_3/index.html">
-            <button>colour pallette</button>
-          </a>
+        <div class="card">
+          <img src="./assets/images/linking in html.png" alt="image">
+          <h2>Linking in HTML</h2>
+          <div class="links">
+            <a href="./HTML/Assignment_1/index.html" target="_blank">
+              <button>Live Preview</button>
+            </a>
+            <a href="https://github.com/usmanameen45/Saylani-Assignment/tree/main/HTML/Assignment_1" target="_blank">
+              <button>Code</button>
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </body>
+ 
+
+  <div class="column">
+    <h3>CSS</h3>
+    <div class="row">
+
+      <div class="card">
+          <img src="./assets/images/google page.png" alt="image">
+          <h2>Google Signup Form</h2>
+          <div class="links">
+            <a href="./css/Assignment_1/index.html" target="_blank">
+              <button>Live Preview</button>
+            </a>
+            <a href="https://github.com/usmanameen45/Saylani-Assignment/tree/main/css/Assignment_1" target="_blank">
+              <button>Code</button>
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="./assets/images/upper page.png" alt="image">
+          <h2>UPPER webpage</h2>
+          <div class="links">
+            <a href="./css/Assignment_2/index.html" target="_blank">
+              <button>Live Preview</button>
+            </a>
+            <a href="https://github.com/usmanameen45/Saylani-Assignment/tree/main/css/Assignment_2" target="_blank">
+              <button>Code</button>
+            </a>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="./assets/images/colour pallet.png" alt="image">
+          <h2>colour pallette</h2>
+          <div class="links">
+            <a href="./css/Assignment_3/index.html" target="_blank">
+              <button>Live Preview</button>
+            </a>
+            <a href="https://github.com/usmanameen45/Saylani-Assignment/tree/main/css/Assignment_3" target="_blank">
+              <button>Code</button>
+            </a>
+          </div>
+        </div>
+    </div>
+  </div>
+   </div>
+  </div>
+</body>
+
 </html>
