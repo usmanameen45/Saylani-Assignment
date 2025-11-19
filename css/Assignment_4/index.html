@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Apple.com</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" type="image/png" href="./assets/images/logo.png" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,300,0,0&icon_"/>
-  </head>
-  <body>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,300,0,0&icon_" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+
+<body>
     <nav>
-      <div class="left">
-        <img src="./assets/images/logo.png" alt="logo" class="logo" />
-      </div>
-      <ul>
-        <li>Store</li>
-        <li>Mac</li>
-        <li>iPad</li>
-        <li>iPhone</li>
-        <li>Watch</li>
-        <li>Vision</li>
-        <li>AirPods</li>
-        <li>TV & Home</li>
-        <li>Entertainment</li>
-        <li>Accessories</li>
-        <li>Support</li>
-      </ul>
-      <div class="right">
-        <span class="material-symbols-outlined">search</span>
-        <span class="material-symbols-outlined">shopping_bag</span>
-        <span class="material-symbols-outlined"id="menu">menu</span>
-      </div>
+        <div class="left">
+            <img src="./assets/images/logo.png" alt="logo" class="logo" />
+        </div>
+        <ul>
+            <li>Store</li>
+            <li>Mac</li>
+            <li>iPad</li>
+            <li>iPhone</li>
+            <li>Watch</li>
+            <li>Vision</li>
+            <li>AirPods</li>
+            <li>TV & Home</li>
+            <li>Entertainment</li>
+            <li>Accessories</li>
+            <li>Support</li>
+        </ul>
+        <div class="right">
+            <span class="material-symbols-outlined">search</span>
+            <span class="material-symbols-outlined">shopping_bag</span>
+            <span class="material-symbols-outlined" id="menu">menu</span>
+        </div>
     </nav>
     <div class="hero">
         <h1>Give something special.</h1>
@@ -108,5 +112,46 @@
             </div>
         </div>
     </div>
-  </body>
+
+   <div class="swiper-main">
+     <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-image: url(./assets/carousel_images/1.jpg);"></div>
+            <div class="swiper-slide" style="background-image: url(./assets/carousel_images/2.jpg);"></div>
+            <div class="swiper-slide" style="background-image: url(./assets/carousel_images/3.jpg);"></div>
+            <div class="swiper-slide" style="background-image: url(./assets/carousel_images/4.jpg);"></div>
+            <div class="swiper-slide" style="background-image: url(./assets/carousel_images/5.jpg);"></div>
+            <div class="swiper-slide" style="background-image: url(./assets/carousel_images/6.jpg);"></div>
+            <div class="swiper-slide" style="background-image: url(./assets/carousel_images/7.jpg);"></div>
+            <div class="swiper-slide" style="background-image: url(./assets/carousel_images/9.jpg);"></div>
+            <div class="swiper-slide" style="background-image: url(./assets/carousel_images/9.jpg);"></div>
+            <div class="swiper-slide" style="background-image: url(./assets/carousel_images/10.jpg);"></div>
+        </div>
+    </div>
+    <div class="swiper-pagination"></div>
+   </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: "auto",
+            centeredSlides: true,
+            spaceBetween: 12,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: false,
+            },
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+            loop: true,
+            watchSlidesProgress: true,
+            bulletClass: "swiper-pagination-bullet",
+            bulletActiveClass: "swiper-pagination-bullet-active",
+        });
+    </script>
+</body>
+
 </html>
