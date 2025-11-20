@@ -1,3 +1,4 @@
+@import url(./swiper-slider.css);
 * {
   margin: 0;
   padding: 0;
@@ -130,47 +131,7 @@ nav > ul {
   gap: 8px;
   height: auto;
 }
-.swiper-main {
-  position: relative;
-  padding-bottom: 40px;
-}
-.swiper {
-  width: 100%;
-  height: calc(100vh - 50px);
-}
 
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0.2;
-  transition: opacity 0.3s ease-in-out;
-  background-size: 100% 100%;
-}
-.swiper-slide-active {
-  opacity: 1;
-}
-
-.swiper-slide {
-  width: 80% !important;
-}
-.swiper-pagination{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    bottom: 16px !important; 
-}
-.swiper-pagination-bullet{
-    background-color: #0000006B !important;
-    opacity: 1 !important;
-    transition: all 0.3s ease-in-out;
-}
-.swiper-pagination-bullet-active{
-    background-color:  #333333 !important;
-}
 @media screen and (max-width: 850px) {
   #menu {
     display: block;
@@ -199,9 +160,6 @@ nav > ul {
     grid-template-rows: repeat(6, 490px);
     padding: 5px;
   }
-  .swiper-slide {
-  width: 100% !important;
-}
   .iphone {
     background-image: url(./assets/images/hero_iphone_17_pro__bknyzxfk2agi_small_2x.jpg);
   }
