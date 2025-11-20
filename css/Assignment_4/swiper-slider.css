@@ -72,7 +72,10 @@
   align-items: flex-end;
   padding: 50px;
 }
-.swiper-content > div {
+.swiper-mobile-images {
+  display: none;
+}
+.swiper-content > div:last-child {
   display: flex;
   align-items: center;
   gap: 20px;
@@ -81,7 +84,7 @@
   transition: all 0.4s ease-in-out;
   transition-delay: 0.75s;
 }
-.swiper-slide-active > .swiper-content > div {
+.swiper-slide-active > .swiper-content > div:last-child {
   transform: translateY(0px);
   opacity: 1;
 }
@@ -125,49 +128,66 @@
     width: 275px !important;
   }
   .slide-1 {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent),
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent, rgba(0, 0, 0, 0.4)),
       url(./assets/carousel_images/mobile_images/1.jpg);
   }
   .slide-2 {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent),
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent, rgba(0, 0, 0, 0.4)),
       url(./assets/carousel_images/mobile_images/2.jpg);
   }
   .slide-3 {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent),
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent, rgba(0, 0, 0, 0.4)),
       url(./assets/carousel_images/mobile_images/3.jpg);
   }
   .slide-4 {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent),
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent, rgba(0, 0, 0, 0.4)),
       url(./assets/carousel_images/mobile_images/4.jpg);
   }
   .slide-5 {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent),
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent, rgba(0, 0, 0, 0.4)),
       url(./assets/carousel_images/mobile_images/5.jpg);
   }
   .slide-6 {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent),
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent, rgba(0, 0, 0, 0.4)),
       url(./assets/carousel_images/mobile_images/6.jpg);
   }
   .slide-7 {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent),
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent, rgba(0, 0, 0, 0.4)),
       url(./assets/carousel_images/mobile_images/7.jpg);
   }
   .slide-8 {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent),
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent, rgba(0, 0, 0, 0.4)),
       url(./assets/carousel_images/mobile_images/8.jpg);
   }
   .slide-9 {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent),
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent, rgba(0, 0, 0, 0.4)),
       url(./assets/carousel_images/mobile_images/9.jpg);
   }
   .slide-10 {
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent),
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent, rgba(0, 0, 0, 0.4)),
       url(./assets/carousel_images/mobile_images/10.jpg);
   }
   .swiper-content {
     padding: 30px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
   }
-  .swiper-content > div {
+  .swiper-mobile-images {
+    display: flex;
+    width: 200px;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .swiper-mobile-images > img:first-child,
+  .swiper-mobile-images > span {
+    height: 28px;
+  }
+  .swiper-mobile-images > img:last-child {
+    width: 100%;
+  }
+  .swiper-content > div:last-child {
     width: 100%;
     flex-direction: column-reverse;
     align-items: center;
