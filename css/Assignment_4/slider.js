@@ -1,4 +1,4 @@
-var swiper = new Swiper(".mySwiper", {
+let swiper = new Swiper(".mySwiper", {
   slidesPerView: "auto",
   centeredSlides: true,
   spaceBetween: 12,
@@ -15,4 +15,16 @@ var swiper = new Swiper(".mySwiper", {
   watchSlidesProgress: true,
   bulletClass: "swiper-pagination-bullet",
   bulletActiveClass: "swiper-pagination-bullet-active",
+});
+// marquee script
+let marquee = new Swiper(".myMarquee", {
+  slidesPerView: "auto",
+  loop: true,
+  spaceBetween: 12,
+  speed: 4000, // lower = slower, higher = faster
+  allowTouchMove: false, // prevent user drag
+  autoplay: {
+    delay: 0,
+    disableOnInteraction: false,
+  },
 });

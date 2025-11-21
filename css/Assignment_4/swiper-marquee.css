@@ -1,0 +1,33 @@
+.marquee {
+  width: 100% !important;
+  height: 200px;
+}
+.myMarquee .swiper-wrapper {
+  --swiper-wrapper-transition-timing-function: linear !important;
+}
+.marquee-slide {
+  width: auto !important;
+  height: 100%;
+  opacity: 1 !important;
+}
+.marquee-slide img {
+  height: 100%;
+  display: block;
+}
+.marquee-controls {
+    width: 100%;
+    height: 56px;
+    padding-inline: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+#toggleMarquee{
+    background-color: #D2D2D7;
+    padding: 4px 4px 0px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #171717;
+}

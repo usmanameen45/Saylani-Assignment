@@ -7,19 +7,17 @@
   height: calc(100vh - 100px);
 }
 
-.swiper-wrapper {
+.Myswiper .swiper-wrapper {
   --swiper-wrapper-transition-timing-function: ease-in !important;
 }
 
 .swiper-slide {
+  width: 80% !important;
   text-align: center;
   font-size: 18px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   opacity: 0.2;
   transition: opacity 0.3s ease-in-out !important;
-  background-size: cover !important;
+  background-size: 100% 100% !important;
 }
 .swiper-slide-active {
   opacity: 1;
@@ -104,9 +102,6 @@
 }
 .swiper-content > div > p > span:first-child {
   font-weight: 600;
-}
-.swiper-slide {
-  width: 80% !important;
 }
 .swiper-pagination {
   display: flex;
