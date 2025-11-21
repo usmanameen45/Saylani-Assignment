@@ -1,33 +1,59 @@
 .marquee {
   width: 100% !important;
-  height: 200px;
+  height: auto !important;
 }
 .myMarquee .swiper-wrapper {
   --swiper-wrapper-transition-timing-function: linear !important;
 }
 .marquee-slide {
-  width: auto !important;
-  height: 100%;
+  width: 417px !important;
   opacity: 1 !important;
 }
-.marquee-slide img {
-  height: 100%;
-  display: block;
+.marquee-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+}
+.marquee-content > img {
+  width: 100%;
+}
+.marquee-content > p {
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+  text-align: left;
+  position: absolute;
+  bottom: 20px;
+  left: 15px;
 }
 .marquee-controls {
-    width: 100%;
-    height: 56px;
-    padding-inline: 20px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+  width: 100%;
+  height: 56px;
+  padding-inline: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
-#toggleMarquee{
-    background-color: #D2D2D7;
-    padding: 4px 4px 0px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
+#toggleMarquee {
+  background-color: #d2d2d7;
+  padding: 4px 4px 0px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #171717;
+}
+
+@media screen and (max-width: 1024px) {
+  .marquee-slide {
+    width: 286px !important;
+  }
+  .marquee-content > p {
+    position: static;
     color: #171717;
+    font-weight: 600;
+    opacity: 1 !important;
+  }
 }
