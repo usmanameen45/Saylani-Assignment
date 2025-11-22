@@ -36,4 +36,7 @@
   .f-div2 {
     display: none !important;
   }
+   .footer-container > p{
+    padding-top: 17px;
+  }
 }
