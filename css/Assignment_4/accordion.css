@@ -1,0 +1,39 @@
+.accordion-body {
+    padding: 5px 0px !important;
+}
+.accordion-body > p {
+  color: #000000B8 !important;
+  margin: 0px !important;
+  padding: 6px 14px !important;
+}
+.accordion-button {
+  box-shadow: none !important;
+  background-color: transparent !important;
+  border-bottom: 1px solid #0000008f !important;
+  border-radius: 0px !important;
+  padding: 8px 0px !important;
+  color: #000000E0 !important;
+  font-size: 12px !important;
+  font-weight: 400 !important;
+}
+.accordion-button::after {
+  height: 12px !important;
+  width: 12px !important;
+  background-size: contain !important;
+}
+.accordion-item {
+  border: none !important;
+  background-color: transparent !important;
+  border-radius: 0px !important;
+}
+.f-div2-mob {
+  display: none;
+}
+@media screen and (max-width: 769px) {
+  .f-div2-mob {
+    display: block;
+  }
+  .f-div2 {
+    display: none !important;
+  }
+}
