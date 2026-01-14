@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #F77A04;
+}
+.container{
+    font-family: "Quicksand", sans-serif;
+    width: 100%;
+    max-width: 320px;
+    border-radius: 12px;
+    box-shadow: #161032 6px 2px 16px 0px, #EF476F -6px -2px 16px 0px;
+    background-color: black;
+    color: #FDFFFC;
+    padding: 16px;
+}
+
+
+.parent {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 8px;
+}
+
+.btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 12px;
+    font-size: 24px;
+    font-weight: 600;
+    background-color: #28282A;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.fun-btn{
+    background-color: #1A1A1A;
+}
+    
+#equal {
+    grid-row: span 2 / span 2;
+    align-items: end;
+    background-color: #F67A08;
+}
+
+#zero {
+    grid-column: span 2 / span 2;
+}
+
+#dot {
+    grid-column-start: 3;
+}
+
+#result{
+    font-size: 64px;
+    font-weight: 600;
+    text-align: right;
+    padding-block: 12px ;
+}
+
+.container > div:nth-child(1) > div{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 24px;
+    gap: 12px;
+}
+
+#question{
+    color: #96959A;
+    height: 46px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#backspace{
+    cursor: pointer;
+    color: #E07A20;
+}
+        

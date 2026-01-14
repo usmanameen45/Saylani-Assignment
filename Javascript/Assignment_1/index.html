@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=backspace" />
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <p id="result">0</p>
+            <div>
+                <p id="question"></p>
+                <span class="material-symbols-outlined" id="backspace" onClick="handleCalc('backspace')">backspace</span>
+            </div>
+        </div>
+
+        <div class="parent">
+            <div class="btn fun-btn" onClick="handleCalc('clear')">AC</div>
+            <div class="btn fun-btn" onClick="handleCalc('%')">%</div>
+            <div class="btn fun-btn" onClick="handleCalc('/')">/</div>
+            <div class="btn fun-btn" onClick="handleCalc('*')">X</div>
+            <div class="btn" onClick="handleCalc('7')">7</div>
+            <div class="btn" onClick="handleCalc('8')">8</div>
+            <div class="btn" onClick="handleCalc('9')">9</div>
+            <div class="btn fun-btn" onClick="handleCalc('-')">-</div>
+            <div class="btn" onClick="handleCalc('4')">4</div>
+            <div class="btn" onClick="handleCalc('5')">5</div>
+            <div class="btn" onClick="handleCalc('6')">6</div>
+            <div class="btn fun-btn" onClick="handleCalc('+')">+</div>
+            <div class="btn" onClick="handleCalc('1')">1</div>
+            <div class="btn" onClick="handleCalc('2')">2</div>
+            <div class="btn" onClick="handleCalc('3')">3</div>
+            <div id="equal" class="btn" onClick="handleCalc('calculate')">=</div>
+            <div id="zero" class="btn" onClick="handleCalc('0')">0</div>
+            <div id="dot" class="btn fun-btn" onClick="handleCalc('.')">.</div>
+        </div>
+
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
