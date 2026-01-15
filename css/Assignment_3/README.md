@@ -3,7 +3,7 @@
 A simple and elegant clone of [Flat UI Colors](https://flatuicolors.com/), built using **pure HTML and CSS**.  
 This project demonstrates responsive layouts, modern UI design, and color palette presentation — all created **without JavaScript**.
 
-🔗 **Live Demo:** [View on GitHub Pages](https://usmanameen45.github.io/Saylani-Assignment/css/Assignment_3/index.html)
+🔗 **Live Demo:** [View on GitHub Pages](https://saylani-assignment-nu.vercel.app/css/Assignment_3/index.html)
 
 ---
 

@@ -7,7 +7,7 @@ This project was created as part of my **Saylani Web Development Assignment** to
 
 ## 🚀 Live Demo
 
-🔗 **View Project:** [Click Here to Visit the Live Page](https://usmanameen45.github.io/Saylani-Assignment/css/Assignment_1/index.html)
+🔗 **View Project:** [Click Here to Visit the Live Page](https://saylani-assignment-nu.vercel.app/css/Assignment_1/index.html)
 
 ---
 

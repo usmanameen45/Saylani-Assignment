@@ -6,7 +6,7 @@ This project is a clone of the Apple homepage, created using HTML, CSS, and Java
 
 ## 🚀 Live Demo
 
-[Link to your deployed project](https://usmanameen45.github.io/Saylani-Assignment/css/Assignment_4/index.html)
+[Link to your deployed project](https://saylani-assignment-nu.vercel.app/css/Assignment_4/index.html)
 
 ---
 

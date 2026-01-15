@@ -10,7 +10,7 @@ A sleek, modern, and fully functional calculator built from the ground up using 
 
 ## Live Demo
 
-Experience the calculator live: [Live Demo Link](https://usmanameen45.github.io/Saylani-Assignment/Javascript/Assignment_1/index.html)
+Experience the calculator live: [Live Demo Link](https://saylani-assignment-nu.vercel.app/Javascript/Assignment_1/index.html)
 
 ## Key Features
 
