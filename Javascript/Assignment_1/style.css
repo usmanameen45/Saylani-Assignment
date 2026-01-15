@@ -41,15 +41,23 @@ body{
     border-radius: 12px;
     cursor: pointer;
 }
-
+.btn:hover{
+    background-color: #1A1A1A;
+}
 .fun-btn{
     background-color: #1A1A1A;
 }
-    
+.fun-btn:hover{
+    background-color: #28282A;
+}  
 #equal {
     grid-row: span 2 / span 2;
     align-items: end;
     background-color: #F67A08;
+}
+
+#equal:hover{
+    background-color: #f39039;
 }
 
 #zero {
