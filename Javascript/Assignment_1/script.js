@@ -8,11 +8,16 @@ function handleCalc(value) {
         document.getElementById("question").innerText = document.getElementById("question").innerText.slice(0, -1);
         break;
     case "calculate":
-        var result = eval(document.getElementById("question").innerText);
-        if(String(result).includes(".")) {
-            document.getElementById("result").innerText = result.toFixed(2);
+        var question = document.getElementById("question");
+        var output = document.getElementById("result");
+        var answer = eval(question.innerText);
+        if(String(answer).includes(".")) {
+            output.innerText = answer.toFixed(2);
         } else {
-            document.getElementById("result").innerText = result;
+            output.innerText = answer;
+        }
+        if(question.innerText == ""){
+            output.innerText = "0";
         }
         break;
     default:
