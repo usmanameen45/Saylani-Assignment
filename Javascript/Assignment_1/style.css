@@ -23,7 +23,7 @@ body{
 }
 
 
-.parent {
+#parent {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(5, 1fr);
@@ -75,7 +75,7 @@ body{
     padding-block: 12px ;
 }
 
-.container > div:nth-child(1) > div{
+#output > div{
     display: flex;
     justify-content: end;
     align-items: center;
@@ -95,4 +95,25 @@ body{
     cursor: pointer;
     color: #E07A20;
 }
-        
+
+#his{
+    display: none;
+    padding: 12px;
+    border-radius: 6px;
+    background-color: #28282A;
+    margin-block: 12px;
+}   
+#CHis{
+    display: none;
+    background-color: #E07A20;
+    padding: 8px 12px;
+    border-radius: 12px;
+    width: min-content;
+    cursor: pointer;
+} 
+#view-history, #view-calculator{
+    cursor: pointer;
+} 
+#view-calculator{
+    display: none;
+}

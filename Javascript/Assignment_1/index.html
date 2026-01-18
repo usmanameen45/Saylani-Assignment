@@ -6,12 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=backspace" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_" />
 </head>
 
 <body>
     <div class="container">
         <div>
+            <span class="material-symbols-outlined" id="view-history" onClick="showHistory()">history</span>
+            <span class="material-symbols-outlined" id="view-calculator" onClick="showCalculator()">calculate</span>
+            <div id="his"></div>
+            <div id="CHis" onClick="clearHistory()">Clear</div>
+        </div>
+        <div id="output">
             <p id="result">0</p>
             <div>
                 <p id="question"></p>
@@ -19,7 +25,7 @@
             </div>
         </div>
 
-        <div class="parent">
+        <div id="parent">
             <div class="btn fun-btn" onClick="handleCalc('clear')">AC</div>
             <div class="btn fun-btn" onClick="handleCalc('%')">%</div>
             <div class="btn fun-btn" onClick="handleCalc('/')">/</div>
