@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="clock-wrapper">
+            <div class="clock-header">
+                <h1>Digital Clock</h1>
+            </div>
+            
+            <div class="clock-display">
+                <div class="time-section">
+                    <div class="time-container">
+                        <span id="hour" class="time-digit">00</span>
+                        <span class="separator">:</span>
+                        <span id="minute" class="time-digit">00</span>
+                        <span class="separator">:</span>
+                        <span id="second" class="time-digit">00</span>
+                    </div>
+                    <div class="am-pm-container">
+                        <span id="amPm" class="am-pm">AM</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="date-display">
+                <div class="date-container">
+                    <span id="day" class="date-item">00</span>
+                    <span class="date-separator">/</span>
+                    <span id="month" class="date-item">JAN</span>
+                    <span class="date-separator">/</span>
+                    <span id="year" class="date-item">0000</span>
+                </div>
+            </div>
+
+            <div class="info-footer">
+                <p>Stay on time, stay productive</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

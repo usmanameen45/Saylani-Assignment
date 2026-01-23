@@ -17,11 +17,15 @@ function handleCalc(value) {
       var answer = eval(question.innerText);
       if (String(answer).includes(".")) {
         output.innerText = answer.toFixed(2);
-        his_arr.push(question.innerText + " = " + output.innerText);
+        if (question.innerText !== "" && answer !== undefined) {
+          his_arr.push(question.innerText + " = " + output.innerText);
+        }
         his();
       } else {
         output.innerText = answer;
-        his_arr.push(question.innerText + " = " + output.innerText);
+        if (question.innerText !== "" && answer !== undefined) {
+          his_arr.push(question.innerText + " = " + output.innerText);
+        }
         his();
       }
       if (question.innerText == "") {
