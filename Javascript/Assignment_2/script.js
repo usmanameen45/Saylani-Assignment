@@ -4,6 +4,10 @@ function clock(){
     var hour = time.getHours();
     var minute = time.getMinutes();
     var second = time.getSeconds();
+    var day = time.getDate();
+    var month = time.getMonth();
+    var year = time.getFullYear();
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     // amPm logic
     var amPm;
     if(hour >= 12){
@@ -24,30 +28,17 @@ function clock(){
     if(second < 10){
         second = "0" + second;
     }
+    if(day < 10){
+        day = "0" + day;
+    }
     // time display
     document.getElementById("hour").innerText = hour;
     document.getElementById("minute").innerText = minute;
     document.getElementById("second").innerText = second;
     document.getElementById("amPm").innerText = amPm;
-}
-clock();
-setInterval(clock, 1000);
-
-function date(){
-    var time = new Date();
-    var day = time.getDate();
-    var month = time.getMonth();
-    var year = time.getFullYear();
-    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    // date formating
-    if(day < 10){
-        day = "0" + day;
-    }
-    
-    // date display
     document.getElementById("day").innerText = day;
     document.getElementById("month").innerText = months[month];
     document.getElementById("year").innerText = year;
 }
-date();
-setInterval(date, 1000);
+clock();
+setInterval(clock, 1000);
