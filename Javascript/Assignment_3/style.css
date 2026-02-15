@@ -45,3 +45,14 @@ body{
     height: 200px;
     border: 1px solid black;
 }
+
+@media (max-width: 600px) {
+    #score-div {
+        flex-direction: column;
+        padding-inline: 85px;
+        gap: 16px;
+    }
+    #score-div h1 {
+        font-size: 24px;
+    }
+}

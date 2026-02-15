@@ -42,14 +42,15 @@ main.addEventListener("click", function(event) {
         event.target.style.backgroundColor = getRandomColor();
         lives--;
         document.getElementById("heart").innerHTML = heart.repeat(lives);
-        if (lives === 0) {
-            score = "game over";
-            scoreDisplay.innerHTML = "Score : " + score;
+        if (lives <= 0) {
+            scoreDisplay.innerHTML = "Score : Game Over";
+           setTimeout(() => {
+            alert("Game Over!");
+            location.reload();
+        }, 50); // small delay so heart disappears first
+
+        return;
         }
-    }
-    if (score === "game over") {
-        alert("Game Over!");
-        location.reload();
     }
 });
 
