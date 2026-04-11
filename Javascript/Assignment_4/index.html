@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App Core</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components/buttons.css">
+    <link rel="stylesheet" href="styles/components/cards.css">
+    <link rel="stylesheet" href="styles/components/inputs.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>My Tasks</h1>
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle dark mode">🌙</button>
+            </div>
+        </header>
+
+        <main>
+            <section id="task-form-section">
+                <form id="add-task-form">
+                    <input type="text" id="task-input" placeholder="What needs to be done?" required maxlength="200">
+                    <button type="submit" id="add-button">Add Task</button>
+                </form>
+            </section>
+
+            <section id="task-list-section">
+                <ul id="task-list">
+                    <!-- Tasks will be rendered here -->
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

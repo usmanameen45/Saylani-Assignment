@@ -1,0 +1,31 @@
+input[type="text"] {
+    width: 100%;
+    padding: var(--spacing-md);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+input[type="text"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+#add-task-form {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+#add-task-form input {
+    flex-grow: 1;
+}
+
+.edit-input {
+    flex-grow: 1;
+    padding: var(--spacing-sm);
+    font-size: 1rem;
+    border: 1px solid var(--primary-color);
+    border-radius: var(--radius);
+}
