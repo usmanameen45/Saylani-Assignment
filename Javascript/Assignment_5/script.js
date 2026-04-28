@@ -2,7 +2,7 @@ let api = async function() {
   try {
     let res = await fetch("https://jsonplaceholder.typicode.com/users");
     let data = await res.json();   
-    console.log(data);
+    
     // loop through the data and create elements for each user
     data.map(user => {
       // main div
