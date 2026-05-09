@@ -1,5 +1,6 @@
+import { doc, setDoc, db, addDoc, collection, getDocs, deleteDoc } from "./fireconfig.js";
 // --- Constants & State ---
-const STORAGE_KEY = 'TODO_APP_TASKS';
+// STORAGE_KEY is not used anywhere, so it is removed.
 const THEME_KEY = 'TODO_APP_THEME';
 
 let tasks = [];
@@ -12,13 +13,6 @@ const taskList = document.getElementById('task-list');
 const themeToggle = document.getElementById('theme-toggle');
 
 // --- Utility Functions ---
-const generateId = () => {
-    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
-        return crypto.randomUUID();
-    }
-    return Date.now().toString(36) + Math.random().toString(36).substring(2);
-};
-
 
 const formatDate = (dateString) => {
     if (!dateString) return '';
@@ -33,34 +27,23 @@ const formatDate = (dateString) => {
 };
 
 // --- Storage Logic ---
-
-
-// Loads tasks and theme from LocalStorage.
-const loadState = () => {
+// Loads tasks from Firebase Firestore.
+const loadState = async () => {
     try {
-        const storedTasks = localStorage.getItem(STORAGE_KEY);
-        tasks = storedTasks ? JSON.parse(storedTasks) : [];
-        
+        const querySnapshot = await getDocs(collection(db, "tasks"));
+        tasks = [];
+        querySnapshot.forEach((doc) => {
+            tasks.push({ ...doc.data(), id: doc.id });
+        });
         const theme = localStorage.getItem(THEME_KEY) || 'light';
         applyTheme(theme);
     } catch (error) {
-        console.error('Failed to load state from LocalStorage:', error);
+        console.error('Failed to load state from Firestore:', error);
         tasks = [];
     }
 };
 
-// Saves current tasks to LocalStorage.
- 
-const syncToStorage = () => {
-    try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
-    } catch (error) {
-        console.error('Failed to save tasks to LocalStorage:', error);
-    }
-};
-
 //  Saves the theme preference.
-
 const saveTheme = (theme) => {
     localStorage.setItem(THEME_KEY, theme);
 };
@@ -68,53 +51,72 @@ const saveTheme = (theme) => {
 // --- Task Operations ---
 
 
-// Creates and returns a new Task object.
-const addTask = (title) => {
+// Creates and saves a new Task object to Firestore.
+const addTask = async (title) => {
     const now = new Date().toISOString();
     const newTask = {
-        id: generateId(),
         title: title.trim(),
         status: 'pending',
         createdAt: now,
         updatedAt: now
     };
-    tasks.push(newTask);
-    syncToStorage();
-    render();
-};
-
-
-// Toggles the completion status of a task.
- 
-const toggleTaskStatus = (id) => {
-    const task = tasks.find(t => t.id === id);
-    if (task) {
-        task.status = task.status === 'pending' ? 'completed' : 'pending';
-        task.updatedAt = new Date().toISOString();
-        syncToStorage();
+    try {
+        await addDoc(collection(db, "tasks"), newTask);
+        await loadState();
         render();
+    } catch (error) {
+        console.error('Failed to add task to Firestore:', error);
     }
 };
 
-// Updates the title of an existing task.
 
-const updateTaskTitle = (id, newTitle) => {
+// Toggles the completion status of a task in Firestore.
+const toggleTaskStatus = async (id) => {
     const task = tasks.find(t => t.id === id);
     if (task) {
-        task.title = newTitle.trim();
-        task.updatedAt = new Date().toISOString();
-        syncToStorage();
-        editingId = null;
-        render();
+        const updatedStatus = task.status === 'pending' ? 'completed' : 'pending';
+        try {
+            await setDoc(doc(db, "tasks", id), {
+                ...task,
+                status: updatedStatus,
+                updatedAt: new Date().toISOString(),
+            });
+            await loadState();
+            render();
+        } catch (error) {
+            console.error('Failed to update task status in Firestore:', error);
+        }
     }
 };
 
-//Removes a task from the list.
+// Updates the title of an existing task in Firestore.
+const updateTaskTitle = async (id, newTitle) => {
+    const task = tasks.find(t => t.id === id);
+    if (task) {
+        try {
+            await setDoc(doc(db, "tasks", id), {
+                ...task,
+                title: newTitle.trim(),
+                updatedAt: new Date().toISOString(),
+            });
+            editingId = null;
+            await loadState();
+            render();
+        } catch (error) {
+            console.error('Failed to update task title in Firestore:', error);
+        }
+    }
+};
 
-const deleteTask = (id) => {
-    tasks = tasks.filter(t => t.id !== id);
-    syncToStorage();
-    render();
+//Removes a task from Firestore.
+const deleteTask = async (id) => {
+    try {
+        await deleteDoc(doc(db, "tasks", id));
+        await loadState();
+        render();
+    } catch (error) {
+        console.error('Failed to delete task from Firestore:', error);
+    }
 };
 
 // --- UI Rendering & Themes ---
@@ -201,19 +203,18 @@ themeToggle.addEventListener('click', () => {
 
 
 // Handles the add task form submission.
-addTaskForm.addEventListener('submit', (e) => {
+addTaskForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const title = taskInput.value.trim();
     if (!title) return;
-
-    addTask(title);
+    await addTask(title);
     taskInput.value = '';
 });
 
 
  // Event Delegation for Task Item Actions.
  // Handles Toggle, Delete, Edit, Save, and Cancel actions.
-taskList.addEventListener('click', (e) => {
+taskList.addEventListener('click', async (e) => {
     const target = e.target;
     const taskCard = target.closest('.task-card');
     if (!taskCard) return;
@@ -222,12 +223,12 @@ taskList.addEventListener('click', (e) => {
 
     // Toggle Status
     if (target.classList.contains('btn-toggle')) {
-        toggleTaskStatus(id);
+        await toggleTaskStatus(id);
     }
 
     // Delete Task
     if (target.classList.contains('btn-delete')) {
-        deleteTask(id);
+        await deleteTask(id);
     }
 
     // Enter Edit Mode
@@ -241,7 +242,7 @@ taskList.addEventListener('click', (e) => {
         const editInput = taskCard.querySelector('.edit-input');
         const newTitle = editInput.value.trim();
         if (newTitle) {
-            updateTaskTitle(id, newTitle);
+            await updateTaskTitle(id, newTitle);
         }
     }
 
@@ -253,7 +254,7 @@ taskList.addEventListener('click', (e) => {
 });
 
 // --- Initialization ---
-document.addEventListener('DOMContentLoaded', () => {
-    loadState();
+document.addEventListener('DOMContentLoaded', async () => {
+    await loadState();
     render();
 });
