@@ -10,7 +10,7 @@
 A simple web application that fetches and displays a list of users from a public API. Each user's details are shown in a card layout, including their name, contact info, address, and company details. Built with vanilla JavaScript, HTML, and CSS
 
 ## 🚀 Live Demo
-Check out the live application here: [Live Demo Link](https://saylani-assignment-nu.vercel.app/Javascript/Assignment_5/index.html)
+Check out the live application here: [Live Demo Link](https://saylani-assignment-nu.vercel.app/Javascript/5_Fetch_Product/index.html)
 
 
 ## 🌟 Project Overview

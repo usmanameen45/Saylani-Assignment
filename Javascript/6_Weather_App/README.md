@@ -11,7 +11,7 @@
 A simple and modern weather application that allows users to search for any city and instantly view the current weather conditions. Built with vanilla JavaScript, HTML, and CSS, it fetches real-time weather data using the Open-Meteo API and displays it in a clean, responsive UI.
 
 ## 🔗 Live Demo
-[View the Weather App Live](https://saylani-assignment-nu.vercel.app/Javascript/Assignment_6/index.html)
+[View the Weather App Live](https://saylani-assignment-nu.vercel.app/Javascript/6_Weather_App/index.html)
 
 ## 🚀 How It Works
 1. Enter a city name in the input field.

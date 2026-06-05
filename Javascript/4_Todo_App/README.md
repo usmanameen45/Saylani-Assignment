@@ -12,7 +12,7 @@ A clean, minimalist, and highly functional Todo application built with vanilla w
 The **Todo App Core** was designed to solve the daily challenge of task organization with a "less is more" philosophy. It allows users to capture ideas, track progress, and manage daily goals through an intuitive interface. Built as a portfolio piece, it demonstrates proficiency in DOM manipulation, Firebase Firestore integration, and modern CSS architectural patterns.
 
 ## 🚀 Live Demo
-Check out the live application here: [Live Demo Link](https://saylani-assignment-nu.vercel.app/Javascript/Assignment_4/index.html) 
+Check out the live application here: [Live Demo Link](https://saylani-assignment-nu.vercel.app/Javascript/4_Todo_App/index.html)
 
 ## ✨ Key Features
 - **Task Management**: Create, Read, Update, and Delete (CRUD) tasks effortlessly.

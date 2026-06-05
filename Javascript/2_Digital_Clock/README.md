@@ -14,7 +14,7 @@ This digital clock application displays the current time and date, updating ever
 
 ## Live Demo
 
-Experience the calculator live: [Live Demo Link](https://saylani-assignment-nu.vercel.app/Javascript/Assignment_2/index.html) 
+Experience the calculator live: [Live Demo Link](https://saylani-assignment-nu.vercel.app/Javascript/2_Digital_Clock/index.html)
 
 ## Key Features
 

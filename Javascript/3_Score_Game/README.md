@@ -2,7 +2,7 @@
 
 A vibrant, interactive web-based game designed to test your visual reflexes and color recognition. Built with a focus on clean code, DOM manipulation, and engaging user experience.
 
-[![Live Demo](https://img.shields.io/badge/demo-live-green.svg)](https://saylani-assignment-nu.vercel.app/Javascript/Assignment_3/index.html)
+[![Live Demo](https://img.shields.io/badge/demo-live-green.svg)](https://saylani-assignment-nu.vercel.app/Javascript/3_Score_Game/index.html)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ---
