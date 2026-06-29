@@ -5,8 +5,7 @@
 A simple registration form built with vanilla HTML, CSS, and JavaScript that validates user input and registers new users through Firebase Authentication.
 
 ## 🔗 Live Preview
-[View the Registration form Live](https://saylani-assignment-nu.vercel.app/Javascript/7_Registration_Form/index.html)
-
+- Vercel deployment: `https://your-vercel-app.vercel.app` (placeholder)
 
 ## ✨ Features
 - Email input with browser validation

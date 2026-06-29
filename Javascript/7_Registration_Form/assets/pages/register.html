@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - PostHub</title>
+    <link rel="stylesheet" href="../styles/register.css">
+</head>
+
+<body>
+    <form>
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Enter your username">
+            <span id="usernameError" class="error"></span>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter your email">
+            <span id="emailError" class="error"></span>
+        </div>
+        <div>
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" placeholder="Enter your phone number">
+            <span id="phoneError" class="error"></span>
+        </div>
+        <div>
+            <label for="address">Address:</label>
+            <input type="text" id="address" placeholder="Enter your address">
+            <span id="addressError" class="error"></span>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Enter your password">
+            <span id="passwordError" class="error"></span>
+        </div>
+        <button type="submit">
+            <span class="reg-text">Register</span>
+            <span class="loader"></span>
+        </button>
+        <p>Already have an account? <a href="assets/pages/login.html">Login</a></p>
+    </form>
+    <script type="module" src="../js/register.js"></script>
+</body>
+
+</html>

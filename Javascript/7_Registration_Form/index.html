@@ -1,28 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <title>PostHub - Share Your Stories</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
-
 <body>
-    <form>
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" placeholder="Enter your email">
-            <span id="emailError" class="error"></span>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">PostHub</div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="assets/pages/register.html" class="nav-link btn-secondary">Join Now</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" id="password" placeholder="Enter your password">
-            <span id="passwordError" class="error"></span>
-        </div>
-        <button type="submit">Register</button>
-    </form>
-    <script type="module" src="app.js"></script>
-</body>
+    </nav>
 
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Share Your Stories with the World</h1>
+            <p class="hero-subtitle">PostHub is the modern platform for creators, thinkers, and storytellers. Connect, inspire, and engage with a global community.</p>
+            <div class="hero-buttons">
+                <a href="assets/pages/register.html" class="btn btn-primary">Get Started</a>
+                <a href="#features" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="floating-card card-1">
+                <div class="card-icon">📝</div>
+                <p>Create</p>
+            </div>
+            <div class="floating-card card-2">
+                <div class="card-icon">👥</div>
+                <p>Connect</p>
+            </div>
+            <div class="floating-card card-3">
+                <div class="card-icon">⭐</div>
+                <p>Inspire</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="section-header">
+            <h2>Why Choose PostHub?</h2>
+            <p>Everything you need to share, grow, and succeed</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">✨</div>
+                <h3>Easy Publishing</h3>
+                <p>Create and publish beautiful posts in seconds with our intuitive editor and rich formatting tools.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔗</div>
+                <h3>Community Driven</h3>
+                <p>Connect with like-minded creators and build meaningful relationships with your audience.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Analytics Dashboard</h3>
+                <p>Track your posts' performance with detailed insights and real-time engagement metrics.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Secure & Private</h3>
+                <p>Your content is protected with enterprise-grade security and privacy controls.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Mobile First</h3>
+                <p>Access PostHub anywhere with our responsive design and powerful mobile app.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <h3>Global Reach</h3>
+                <p>Share your voice with millions of users across the globe in real-time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="about-content">
+            <h2>About PostHub</h2>
+            <p>PostHub is revolutionizing how creators share their stories and connect with audiences worldwide. Founded by passionate creators and technologists, we've built a platform that celebrates creativity, fosters community, and empowers voices.</p>
+            <div class="stats">
+                <div class="stat">
+                    <h3>500K+</h3>
+                    <p>Active Users</p>
+                </div>
+                <div class="stat">
+                    <h3>2M+</h3>
+                    <p>Posts Published</p>
+                </div>
+                <div class="stat">
+                    <h3>50+</h3>
+                    <p>Countries</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Ready to Share Your Story?</h2>
+        <p>Join thousands of creators on PostHub today</p>
+        <a href="assets/pages/register.html" class="btn btn-primary btn-large">Create Free Account</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>PostHub</h4>
+                <p>Your platform to share, inspire, and grow.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <ul>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 PostHub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="./app.js"></script>
+</body>
 </html>
