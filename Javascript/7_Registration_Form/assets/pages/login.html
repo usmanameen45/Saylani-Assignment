@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register - PostHub</title>
-  <meta name="description" content="Create a PostHub account to start writing and managing your posts.">
+  <title>Sign in - PostHub</title>
+  <meta name="description" content="Sign in to PostHub to manage your posts.">
   <link rel="stylesheet" href="../styles/auth.css">
 </head>
 <body>
@@ -14,21 +14,15 @@
     <div class="spinner"></div>
   </div>
 
-  <!-- Registration card -->
+  <!-- Login card -->
   <div class="auth-card" id="authCard" style="display:none;">
     <div class="auth-header">
       <a href="../../index.html" class="auth-logo">PostHub</a>
-      <h1>Create an account</h1>
-      <p>Already have one? <a href="login.html">Sign in</a></p>
+      <h1>Welcome back</h1>
+      <p>Don't have an account? <a href="register.html">Register</a></p>
     </div>
 
-    <form class="auth-form" id="registerForm" novalidate>
-
-      <div class="field">
-        <label for="name">Full name</label>
-        <input type="text" id="name" autocomplete="name" placeholder="Your name">
-        <span class="field-error" id="nameError"></span>
-      </div>
+    <form class="auth-form" id="loginForm" novalidate>
 
       <div class="field">
         <label for="email">Email</label>
@@ -37,27 +31,15 @@
       </div>
 
       <div class="field">
-        <label for="phone">Phone</label>
-        <input type="tel" id="phone" autocomplete="tel" placeholder="03xx-xxxxxxx">
-        <span class="field-error" id="phoneError"></span>
-      </div>
-
-      <div class="field">
-        <label for="address">Address</label>
-        <input type="text" id="address" autocomplete="street-address" placeholder="City, Country">
-        <span class="field-error" id="addressError"></span>
-      </div>
-
-      <div class="field">
         <label for="password">Password</label>
-        <input type="password" id="password" autocomplete="new-password" placeholder="Min 8 chars, upper, lower, number, symbol">
+        <input type="password" id="password" autocomplete="current-password" placeholder="Your password">
         <span class="field-error" id="passwordError"></span>
       </div>
 
       <div class="form-error-global" id="globalError"></div>
 
       <button type="submit" class="btn-submit" id="submitBtn">
-        <span class="btn-label">Register</span>
+        <span class="btn-label">Sign in</span>
         <span class="btn-spinner"></span>
       </button>
 
@@ -79,10 +61,34 @@
     </form>
 
     <div class="auth-footer">
-      <p>By registering you agree to use this app responsibly.</p>
+      <p>Forgot your password? <a href="#" id="forgotPasswordLink">Reset here</a>.</p>
     </div>
   </div>
 
-  <script type="module" src="../js/register.js"></script>
+  <!-- Forgot Password Modal -->
+  <div class="modal-overlay" id="forgotPasswordModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Reset Password</h3>
+        <button class="btn-close-modal" id="closeForgotModalBtn">&times;</button>
+      </div>
+      <form id="forgotPasswordForm" novalidate>
+        <div class="form-group">
+          <label for="forgotEmail">Enter your email address and we'll send you a link to reset your password.</label>
+          <input type="email" id="forgotEmail" required placeholder="you@example.com" style="width: 100%; margin-top: 8px;">
+          <span class="error-msg" id="forgotEmailError" style="display: block; margin-top: 6px;"></span>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" id="cancelForgotBtn">Cancel</button>
+          <button type="submit" class="btn-save" id="sendResetBtn">
+            <span class="save-label">Send Reset Link</span>
+            <span class="btn-spinner"></span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="../js/login.js"></script>
 </body>
 </html>

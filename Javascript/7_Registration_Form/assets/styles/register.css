@@ -64,9 +64,10 @@ body::before {
 }
 
 form {
-  width: min(440px, 100%);
+  width: min(720px, 100%);
   padding: 32px 28px;
   display: grid;
+  grid-template-columns: 1fr;
   gap: 12px;
   background: rgba(15, 20, 33, 0.92);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -83,6 +84,14 @@ form::before {
   letter-spacing: -0.03em;
   color: #f8f9ff;
   margin-bottom: 4px;
+}
+
+form > button,
+form > .google-signup,
+form > p,
+form::before,
+form > div:nth-child(5) {
+  grid-column: 1 / -1;
 }
 
 form > div {
@@ -153,6 +162,25 @@ button:active {
   opacity: 0.96;
 }
 
+button.google-signup {
+  margin-top: 0;
+  min-height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: #ffffff;
+  color: #111827;
+  box-shadow: 0 10px 24px rgba(15, 20, 33, 0.12);
+}
+
+button.google-signup:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(15, 20, 33, 0.18);
+}
+
+button.google-signup:active {
+  transform: translateY(0);
+  opacity: 0.96;
+}
+
 .loader {
   width: 28px;
   height: 28px;
@@ -162,6 +190,12 @@ button:active {
   display: none;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
+}
+
+.form-loader {
+  display: inline;
+  width: 48px;
+  height: 48px;
 }
 
 @keyframes rotation {
@@ -190,11 +224,50 @@ button:active {
   }
 
   form {
-    padding: 28px 22px;
+    padding: 24px 18px;
     border-radius: 22px;
+    gap: 10px;
   }
 
   form::before {
-    font-size: 1.45rem;
+    font-size: 1.35rem;
+  }
+
+  label {
+    font-size: 0.82rem;
+  }
+
+  input {
+    min-height: 40px;
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+
+  button,
+  button.google-signup {
+    min-height: 44px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 420px) {
+  form {
+    padding: 20px 16px;
+  }
+
+  form::before {
+    font-size: 1.25rem;
+  }
+
+  input {
+    min-height: 38px;
+    padding: 10px 12px;
+  }
+}
+
+@media (min-width: 760px) {
+  form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 18px;
   }
 }

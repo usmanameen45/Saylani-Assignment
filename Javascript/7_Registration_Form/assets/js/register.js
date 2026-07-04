@@ -1,181 +1,255 @@
-import { getAuth, createUserWithEmailAndPassword, doc, setDoc, getDocs, db, query, where, collection } from "../../fireconfig.js";
+import {
+  getAuth,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  doc,
+  setDoc,
+  getDoc,
+  getDocs,
+  db,
+  query,
+  where,
+  collection,
+  GoogleAuthProvider,
+  signInWithPopup,
+  fetchSignInMethodsForEmail,
+} from "../../fireconfig.js";
 
-// Form elements - Check if they exist before accessing
-let username = document.querySelector("#username");
-let email = document.querySelector("#email");
-let phone = document.querySelector("#phone");
-let address = document.querySelector("#address");
-let password = document.querySelector("#password");
-let regLoader = document.querySelector(".loader");
-let regText = document.querySelector(".reg-text");
-let submitBtn = document.querySelector("button[type='submit']");
-let form = document.querySelector("form");
-let usernameError = document.querySelector("#usernameError");
-let emailError = document.querySelector("#emailError");
-let phoneError = document.querySelector("#phoneError");
-let addressError = document.querySelector("#addressError");
-let passwordError = document.querySelector("#passwordError");
+/* ---- DOM refs ---- */
+const pageLoader  = document.getElementById("pageLoader");
+const authCard    = document.getElementById("authCard");
+const form        = document.getElementById("registerForm");
+const nameInput   = document.getElementById("name");
+const emailInput  = document.getElementById("email");
+const phoneInput  = document.getElementById("phone");
+const addressInput = document.getElementById("address");
+const passwordInput = document.getElementById("password");
+const submitBtn   = document.getElementById("submitBtn");
+const globalError = document.getElementById("globalError");
 
-// Only run form validation if form elements exist (registration page)
-if (form && username && email && phone && address && password) {
-  // Username validation function
-  function validateUsername(usernameValue) {
-    return usernameValue.trim().length >= 3;
+const nameErr     = document.getElementById("nameError");
+const emailErr    = document.getElementById("emailError");
+const phoneErr    = document.getElementById("phoneError");
+const addressErr  = document.getElementById("addressError");
+const passwordErr = document.getElementById("passwordError");
+
+const auth = getAuth();
+
+/* ---- Registration state flag to prevent premature redirect ---- */
+let isRegistering = false;
+
+/* ---- Auth guard: redirect if already logged in ---- */
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    if (!isRegistering) {
+      window.location.replace("dashboard.html");
+    }
+  } else {
+    // User not logged in — show the form
+    pageLoader.classList.add("hidden");
+    setTimeout(() => {
+      pageLoader.style.display = "none";
+      authCard.style.display = "block";
+    }, 320);
+  }
+});
+
+/* ---- Validation helpers ---- */
+function setError(input, errEl, message) {
+  if (message) {
+    input.classList.add("invalid");
+    errEl.textContent = message;
+  } else {
+    input.classList.remove("invalid");
+    errEl.textContent = "";
+  }
+}
+
+function validateName(val)     { return val.trim().length >= 3; }
+function validatePhone(val)    { return /^[0-9]{10,15}$/.test(val.replace(/[\s\-()]/g, "")); }
+function validateAddress(val)  { return val.trim().length >= 5; }
+function validatePassword(val) {
+  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(val);
+}
+
+/* ---- Real-time validation ---- */
+nameInput.addEventListener("input", () => {
+  setError(nameInput, nameErr, validateName(nameInput.value) ? "" : "At least 3 characters.");
+});
+emailInput.addEventListener("input", () => {
+  setError(emailInput, emailErr, emailInput.validity.valid ? "" : "Enter a valid email.");
+});
+phoneInput.addEventListener("input", () => {
+  setError(phoneInput, phoneErr, validatePhone(phoneInput.value) ? "" : "10-15 digits only.");
+});
+addressInput.addEventListener("input", () => {
+  setError(addressInput, addressErr, validateAddress(addressInput.value) ? "" : "At least 5 characters.");
+});
+passwordInput.addEventListener("input", () => {
+  setError(passwordInput, passwordErr,
+    validatePassword(passwordInput.value) ? "" : "Min 8 chars with upper, lower, number, and symbol.");
+});
+
+/* ---- Submit ---- */
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  globalError.classList.remove("visible");
+
+  // Run all validations first
+  let valid = true;
+
+  if (!validateName(nameInput.value)) {
+    setError(nameInput, nameErr, "At least 3 characters.");
+    valid = false;
+  }
+  if (!emailInput.validity.valid) {
+    setError(emailInput, emailErr, "Enter a valid email.");
+    valid = false;
+  }
+  if (!validatePhone(phoneInput.value)) {
+    setError(phoneInput, phoneErr, "10-15 digits only.");
+    valid = false;
+  }
+  if (!validateAddress(addressInput.value)) {
+    setError(addressInput, addressErr, "At least 5 characters.");
+    valid = false;
+  }
+  if (!validatePassword(passwordInput.value)) {
+    setError(passwordInput, passwordErr, "Min 8 chars with upper, lower, number, and symbol.");
+    valid = false;
   }
 
-  // Event listener for real-time validation for username
-  username.addEventListener("input", () => {
-    if (validateUsername(username.value)) {
-      username.classList.remove("invalid");
-      usernameError.textContent = "";
-    } else {
-      username.classList.add("invalid");
-      usernameError.textContent = "Username must be at least 3 characters long.";
-    }
-  });
+  if (!valid) return;
 
-  // Phone validation function
-  function validatePhone(phoneValue) {
-    const phoneRegex = /^[0-9]{10,15}$/;
-    return phoneRegex.test(phoneValue.replace(/[\s\-()]/g, ""));
-  }
+  // Show loading state
+  submitBtn.classList.add("loading");
+  submitBtn.disabled = true;
 
-  // Event listener for real-time validation for phone
-  phone.addEventListener("input", () => {
-    if (validatePhone(phone.value)) {
-      phone.classList.remove("invalid");
-      phoneError.textContent = "";
-    } else {
-      phone.classList.add("invalid");
-      phoneError.textContent = "Please enter a valid phone number (10-15 digits).";
-    }
-  });
-
-  // Address validation function
-  function validateAddress(addressValue) {
-    return addressValue.trim().length >= 5;
-  }
-
-  // Event listener for real-time validation for address
-  address.addEventListener("input", () => {
-    if (validateAddress(address.value)) {
-      address.classList.remove("invalid");
-      addressError.textContent = "";
-    } else {
-      address.classList.add("invalid");
-      addressError.textContent = "Please enter a valid address (at least 5 characters).";
-    }
-  });
-
-  // Event listeners for real-time validation for email
-  email.addEventListener("input", () => {
-    if (email.validity.valid) {
-      email.classList.remove("invalid");
-      emailError.textContent = "";
-    } else {
-      email.classList.add("invalid");
-      emailError.textContent = "Please enter a valid email address.";
-    }
-  });
-
-  // Password validation function
-  function validatePassword(passwordValue) {
-    const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    return passwordRegex.test(passwordValue);
-  }
-
-  // Event listener for real-time validation for password
-  password.addEventListener("input", () => {
-    if (validatePassword(password.value)) {
-      password.classList.remove("invalid");
-      passwordError.textContent = "";
-    } else {
-      password.classList.add("invalid");
-      passwordError.textContent =
-        "Password must be at least 8 characters long and include uppercase letters, lowercase letters, numbers, and special characters.";
-    }
-  });
-
-  // Form submission event listener
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-    
-    if (!validateUsername(username.value)) {
-      usernameError.textContent = "Username must be at least 3 characters long.";
-      username.classList.add("invalid");
-      return;
-    }
-    if (!email.validity.valid) {
-      emailError.textContent = "Please enter a valid email address.";
-      email.classList.add("invalid");
-      return;
-    }
-    if (!validatePhone(phone.value)) {
-      phoneError.textContent = "Please enter a valid phone number (10-15 digits).";
-      phone.classList.add("invalid");
-      return;
-    }
-    if (!validateAddress(address.value)) {
-      addressError.textContent = "Please enter a valid address (at least 5 characters).";
-      address.classList.add("invalid");
-      return;
-    }
-    if (!validatePassword(password.value)) {
-      passwordError.textContent =
-        "Password must be at least 8 characters long and include uppercase letters, lowercase letters, numbers, and special characters.";
-      password.classList.add("invalid");
-      return;
-    }
-    
-    regText.style.display = "none";
-    submitBtn.disabled = true;
-    regLoader.style.display = "inline-block";
-
+  try {
+    // Check if user email already exists in our users collection
     const usersRef = collection(db, "users");
-    const q = query(usersRef, where("email", "==", email.value));
-    const querySnapshot = await getDocs(q);
+    const q = query(usersRef, where("email", "==", emailInput.value));
+    const snapshot = await getDocs(q);
 
-    if (querySnapshot.size > 0) {
-      emailError.textContent = "User with this email already exists.";
-      email.classList.add("invalid");
-      regLoader.style.display = "none";
-      regText.style.display = "inline-block";
+    if (snapshot.size > 0) {
+      setError(emailInput, emailErr, "An account with this email already exists.");
+      submitBtn.classList.remove("loading");
       submitBtn.disabled = false;
       return;
     }
 
-    createUserWithEmailAndPassword(getAuth(), email.value, password.value)
-      .then(async (userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        const data = {
-          username: username.value,
-          email: email.value,
-          phone: phone.value,
-          address: address.value,
-          password: password.value,
+    // Set registering flag to true to prevent premature auth state redirection
+    isRegistering = true;
+
+    // Create Firebase auth user
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      emailInput.value,
+      passwordInput.value
+    );
+
+    const user = userCredential.user;
+    console.log("user created: ", user);
+
+    // Save extra profile data to Firestore
+    await setDoc(doc(db, "users", user.uid), {
+      name:    nameInput.value.trim(),
+      email:   emailInput.value.trim(),
+      phone:   phoneInput.value.trim(),
+      address: addressInput.value.trim(),
+    });
+
+    // Redirect to dashboard
+    window.location.replace("dashboard.html");
+
+  } catch (error) {
+    isRegistering = false;
+    submitBtn.classList.remove("loading");
+    submitBtn.disabled = false;
+
+    if (error.code === "auth/email-already-in-use") {
+      // Check whether the existing account was created via Google
+      try {
+        const methods = await fetchSignInMethodsForEmail(auth, emailInput.value.trim());
+        if (methods.includes("google.com") && !methods.includes("password")) {
+          // Purely a Google account — guide the user clearly
+          setError(
+            emailInput,
+            emailErr,
+            "This email is already linked to a Google account. Please sign in with Google instead."
+          );
+          globalError.innerHTML =
+            `This email was previously registered via Google Sign-In. ` +
+            `<a href="login.html" style="color:inherit;text-decoration:underline;font-weight:600;">Go to Sign In</a> ` +
+            `and click "Continue with Google" to access your account.`;
+          globalError.classList.add("visible");
+          return;
         }
-        await setDoc(doc(db, "users", user.uid), data);
-        regLoader.style.display = "none";
-        regText.style.display = "inline-block";
-        username.value = "";
-        email.value = "";
-        phone.value = "";
-        address.value = "";
-        password.value = "";
-        submitBtn.disabled = false;
-        console.log(user);
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        regLoader.style.display = "none";
-        regText.style.display = "inline-block";
-        submitBtn.disabled = false;
-        // ..
-      });
+      } catch (_) {
+        // fetchSignInMethodsForEmail failed — fall through to generic message
+      }
+      // Standard email/password duplicate
+      setError(emailInput, emailErr, "An account with this email already exists.");
+      return;
+    }
+
+    // Map other Firebase error codes to readable messages
+    const messages = {
+      "auth/weak-password": "Password is too weak.",
+      "auth/network-request-failed": "Network error. Check your connection.",
+    };
+    const msg = messages[error.code] || "Registration failed. Please try again.";
+    globalError.textContent = msg;
+    globalError.classList.add("visible");
+  }
+});
+
+/* ---- Google Sign Up ---- */
+const googleBtn = document.getElementById("googleBtn");
+if (googleBtn) {
+  googleBtn.addEventListener("click", async () => {
+    globalError.classList.remove("visible");
+    googleBtn.classList.add("loading");
+    googleBtn.disabled = true;
+
+    try {
+      isRegistering = true;
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      // Sync user profile data to Firestore if they don't already have a document
+      const userDocRef = doc(db, "users", user.uid);
+      const userDocSnap = await getDoc(userDocRef);
+      if (!userDocSnap.exists()) {
+        await setDoc(userDocRef, {
+          name: user.displayName || "Google User",
+          email: user.email,
+          phone: "",
+          address: "",
+          photoURL: user.photoURL || "",
+        });
+      }
+
+      // Redirect to dashboard
+      window.location.replace("dashboard.html");
+
+    } catch (error) {
+      isRegistering = false;
+      googleBtn.classList.remove("loading");
+      googleBtn.disabled = false;
+      console.error("Google Authentication error:", error);
+
+      // Handle common Firebase Google Auth errors
+      const messages = {
+        "auth/popup-closed-by-user": "Sign-in popup was closed before completion.",
+        "auth/cancelled-popup-request": "Sign-in request was cancelled.",
+        "auth/network-request-failed": "Network error. Check your connection.",
+        "auth/account-exists-with-different-credential": "An account already exists with a different credential.",
+      };
+      const msg = messages[error.code] || "Google authentication failed. Please try again.";
+      globalError.textContent = msg;
+      globalError.classList.add("visible");
+    }
   });
 }
