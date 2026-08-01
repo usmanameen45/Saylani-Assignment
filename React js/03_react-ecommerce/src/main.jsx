@@ -1,0 +1,20 @@
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router";
+import "./index.css";
+import Products from "./Pages/Products.jsx";
+import Lyout from "./components/layout.jsx";
+import HomePage from "./Pages/HomePage.jsx";
+
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<Lyout />}>
+          <Route index element={<HomePage />} />
+          <Route path="products" element={<Products />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  </StrictMode>
+);
