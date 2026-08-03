@@ -5,6 +5,7 @@ import "./index.css";
 import Products from "./Pages/Products.jsx";
 import Lyout from "./components/layout.jsx";
 import HomePage from "./Pages/HomePage.jsx";
+import ProductDetailPage from "./Pages/ProductDetailPage.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -12,7 +13,10 @@ createRoot(document.getElementById("root")).render(
       <Routes>
         <Route element={<Lyout />}>
           <Route index element={<HomePage />} />
-          <Route path="products" element={<Products />} />
+          <Route path="products">
+            <Route index element={<Products />} />
+            <Route path=":id" element={<ProductDetailPage />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
