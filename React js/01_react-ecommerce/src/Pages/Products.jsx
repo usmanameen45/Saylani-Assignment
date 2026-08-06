@@ -22,7 +22,7 @@ const Products = () => {
       } finally {
         setLoading(false);
       }
-    })();
+    });
   }, []);
 
   return (
