@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { Search, ShoppingBag, Menu, X } from "lucide-react";
-import { CREAM, INK, HAIR, DISPLAY_FONT } from "../../Pages/HomePage.jsx";
+import { CREAM, INK, HAIR, DISPLAY_FONT ,ROSE } from "../../Pages/HomePage.jsx";
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
