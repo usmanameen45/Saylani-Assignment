@@ -1,1 +1,59 @@
 @import "tailwindcss";
+
+:root {
+  --ink: #241F1C;
+  --cream: #FBF7F2;
+  --blush: #F3E4E1;
+  --rose: #B3697A;
+  --rose-dark: #96525F;
+  --gold: #A9822F;
+  --stone: #9C948C;
+  --hair: #E7DFD6;
+  
+  --stock-out: #B3697A;
+  --stock-low: #B8863B;
+  --stock-in: #5F7A5A;
+  
+  --image-bg: #F2ECE3;
+  --skeleton-bg: #e5ddd3;
+  
+  --font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, 'Times New Roman', serif;
+}
+
+[data-theme="dark"] {
+  --ink: #FBF7F2;
+  --cream: #14110F;
+  --blush: #221C1A;
+  --rose: #E59AA8;
+  --rose-dark: #F4B5C1;
+  --gold: #E5C158;
+  --stone: #BCAFA3;
+  --hair: #2C2421;
+  
+  --stock-out: #E59AA8;
+  --stock-low: #E5C158;
+  --stock-in: #8BB085;
+  
+  --image-bg: #1E1816;
+  --skeleton-bg: #2C2421;
+}
+
+@theme {
+  --color-ink: var(--ink);
+  --color-cream: var(--cream);
+  --color-blush: var(--blush);
+  --color-rose: var(--rose);
+  --color-rose-dark: var(--rose-dark);
+  --color-gold: var(--gold);
+  --color-stone: var(--stone);
+  --color-hair: var(--hair);
+  
+  --color-stock-out: var(--stock-out);
+  --color-stock-low: var(--stock-low);
+  --color-stock-in: var(--stock-in);
+  
+  --color-image-bg: var(--image-bg);
+  --color-skeleton-bg: var(--skeleton-bg);
+  
+  --font-display: var(--font-display);
+}

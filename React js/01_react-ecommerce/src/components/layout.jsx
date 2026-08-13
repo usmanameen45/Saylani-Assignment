@@ -5,7 +5,7 @@ import Footer from './common/footer.jsx'
 
 const Lyout = () => {
   return (
-    <div style={{ backgroundColor: "#FBF7F2" }}>
+    <div className="bg-cream min-h-screen text-ink transition-colors duration-300">
         <Header />
         <Outlet />
         <Footer />

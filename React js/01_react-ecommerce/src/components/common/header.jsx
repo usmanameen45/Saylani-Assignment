@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router";
 import { Search, ShoppingBag, Menu, X } from "lucide-react";
-import { CREAM, INK, HAIR, DISPLAY_FONT ,ROSE } from "../../Pages/HomePage.jsx";
+import ThemeToggle from "./themeToggle.jsx";
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -21,18 +21,15 @@ function Header() {
 
   return (
     <header
-      className="sticky top-0 z-50 transition-colors duration-300"
-      style={{
-        backgroundColor: scrolled ? CREAM : "transparent",
-        borderBottom: scrolled ? `1px solid ${HAIR}` : "1px solid transparent",
-      }}
+      className={`sticky top-0 z-50 transition-all duration-300 border-b ${
+        scrolled ? "bg-cream border-hair" : "bg-transparent border-transparent"
+      }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
         {/* Logo */}
         <Link
           to="/"
-          className="text-[22px] font-medium tracking-[0.14em]"
-          style={{ fontFamily: DISPLAY_FONT, color: INK }}
+          className="font-display text-ink text-[22px] font-medium tracking-[0.14em]"
         >
           SOLÈNE
         </Link>
@@ -43,10 +40,7 @@ function Header() {
             <Link
               key={link.label}
               to={link.to}
-              className="text-[12.5px] font-medium uppercase tracking transition-colors"
-              style={{ color: INK }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = ROSE)}
-              onMouseLeave={(e) => (e.currentTarget.style.color = INK)}
+              className="text-ink hover:text-rose text-[12.5px] font-medium uppercase tracking transition-colors duration-300"
             >
               {link.label}
             </Link>
@@ -57,23 +51,21 @@ function Header() {
         <div className="flex items-center gap-4">
           <button
             aria-label="Search"
-            className="hidden h-5 w-5 items-center justify-center sm:flex"
-            style={{ color: INK }}
+            className="hidden h-5 w-5 items-center justify-center sm:flex text-ink hover:text-rose transition-colors duration-300 cursor-pointer"
           >
             <Search className="h-4.5 w-4.5" strokeWidth={1.5} />
           </button>
           <Link
             to="/products"
             aria-label="Bag"
-            className="flex h-5 w-5 items-center justify-center"
-            style={{ color: INK }}
+            className="flex h-5 w-5 items-center justify-center text-ink hover:text-rose transition-colors duration-300"
           >
             <ShoppingBag className="h-4.5 w-4.5" strokeWidth={1.5} />
           </Link>
+          <ThemeToggle />
           <button
             aria-label={menuOpen ? "Close menu" : "Open menu"}
-            className="flex h-5 w-5 items-center justify-center md:hidden"
-            style={{ color: INK }}
+            className="flex h-5 w-5 items-center justify-center md:hidden text-ink hover:text-rose transition-colors duration-300 cursor-pointer"
             onClick={() => setMenuOpen((v) => !v)}
           >
             {menuOpen ? (
@@ -87,17 +79,13 @@ function Header() {
 
       {/* Mobile nav */}
       {menuOpen && (
-        <nav
-          className="flex flex-col gap-1 px-6 pb-5 md:hidden"
-          style={{ backgroundColor: CREAM }}
-        >
+        <nav className="bg-cream flex flex-col gap-1 px-6 pb-5 md:hidden transition-colors duration-300">
           {navLinks.map((link) => (
             <Link
               key={link.label}
               to={link.to}
               onClick={() => setMenuOpen(false)}
-              className="py-2.5 text-[13px] font-medium uppercase tracking"
-              style={{ color: INK, borderBottom: `1px solid ${HAIR}` }}
+              className="text-ink border-b border-hair hover:text-rose py-2.5 text-[13px] font-medium uppercase tracking transition-colors duration-300"
             >
               {link.label}
             </Link>

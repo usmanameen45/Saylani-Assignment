@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import {
   AlertCircle,
@@ -14,18 +14,6 @@ import {
   Truck,
 } from "lucide-react";
 
-const INK = "#241F1C";
-const CREAM = "#FBF7F2";
-const BLUSH = "#F3E4E1";
-const ROSE = "#B3697A";
-const ROSE_DARK = "#96525F";
-const GOLD = "#A9822F";
-const STONE = "#9C948C";
-const HAIR = "#E7DFD6";
-
-const DISPLAY_FONT =
-  "'Cormorant Garamond', 'Playfair Display', Georgia, 'Times New Roman', serif";
-
 /* ------------------------------------------------------------------ */
 /* Shared small pieces                                                  */
 /* ------------------------------------------------------------------ */
@@ -38,9 +26,9 @@ function Stars({ rating, size = "h-3.5 w-3.5" }) {
         const fill = rounded - i >= 1 ? 1 : rounded - i === 0.5 ? 0.5 : 0;
         return (
           <span key={i} className={`relative inline-block ${size}`}>
-            <Star className={`absolute inset-0 ${size}`} strokeWidth={1.25} style={{ color: GOLD }} />
+            <Star className={`absolute inset-0 ${size} text-gold`} strokeWidth={1.25} />
             <span className="absolute inset-0 overflow-hidden" style={{ width: `${fill * 100}%` }}>
-              <Star className={size} strokeWidth={1.25} fill={GOLD} style={{ color: GOLD }} />
+              <Star className={`${size} text-gold fill-gold`} strokeWidth={1.25} />
             </span>
           </span>
         );
@@ -52,9 +40,8 @@ function Stars({ rating, size = "h-3.5 w-3.5" }) {
 function RibbonTag({ children }) {
   return (
     <span
-      className="inline-flex items-center px-2.5 py-1 text-[10.5px] font-medium uppercase tracking-[0.12em] text-white"
+      className="bg-rose inline-flex items-center px-2.5 py-1 text-[10.5px] font-medium uppercase tracking-[0.12em] text-white"
       style={{
-        backgroundColor: ROSE,
         clipPath: "polygon(0 0, 100% 0, 100% 100%, 8px 100%, 0 calc(100% - 8px))",
       }}
     >
@@ -66,12 +53,18 @@ function RibbonTag({ children }) {
 function StockDot({ status, stock }) {
   const isOut = status === "Out of Stock" || stock === 0;
   const isLow = !isOut && (status === "Low Stock" || (stock > 0 && stock <= 10));
-  const color = isOut ? ROSE : isLow ? "#B8863B" : "#5F7A5A";
-  const label = isOut ? "Out of stock" : isLow ? `Only ${stock} left in stock` : "In stock";
   return (
     <span className="inline-flex items-center gap-1.5 text-[12.5px]">
-      <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: color }} />
-      <span style={{ color }}>{label}</span>
+      <span
+        className={`h-1.5 w-1.5 rounded-full transition-colors duration-300 ${
+          isOut ? "bg-stock-out" : isLow ? "bg-stock-low" : "bg-stock-in"
+        }`}
+      />
+      <span className={`transition-colors duration-300 ${
+        isOut ? "text-stock-out" : isLow ? "text-stock-low" : "text-stock-in"
+      }`}>
+        {isOut ? "Out of stock" : isLow ? `Only ${stock} left in stock` : "In stock"}
+      </span>
     </span>
   );
 }
@@ -79,12 +72,12 @@ function StockDot({ status, stock }) {
 function Breadcrumb({ category, title }) {
   return (
     <div className="mx-auto max-w-7xl px-6 pt-6 lg:px-10">
-      <nav className="flex items-center gap-2 text-[12px]" style={{ color: STONE }}>
-        <Link to="/" style={{ color: STONE }}>Home</Link>
+      <nav className="text-stone flex items-center gap-2 text-[12px] transition-colors duration-300">
+        <Link to="/" className="text-stone hover:text-rose transition-colors duration-300">Home</Link>
         <span>/</span>
-        <Link to="/products" className="capitalize" style={{ color: STONE }}>{category}</Link>
+        <Link to="/products" className="text-stone hover:text-rose capitalize transition-colors duration-300">{category}</Link>
         <span>/</span>
-        <span style={{ color: INK }} className="truncate">{title}</span>
+        <span className="text-ink truncate transition-colors duration-300">{title}</span>
       </nav>
     </div>
   );
@@ -104,11 +97,9 @@ function Gallery({ images, title }) {
           <button
             key={src + i}
             onClick={() => setActive(i)}
-            className="h-16 w-14 shrink-0 overflow-hidden transition-opacity sm:h-20 sm:w-16"
-            style={{
-              border: `1px solid ${active === i ? ROSE : HAIR}`,
-              opacity: active === i ? 1 : 0.75,
-            }}
+            className={`h-16 w-14 shrink-0 overflow-hidden transition-all duration-300 sm:h-20 sm:w-16 border cursor-pointer ${
+              active === i ? "border-rose opacity-100" : "border-hair opacity-75 hover:opacity-100"
+            }`}
             aria-label={`Show image ${i + 1}`}
           >
             <img src={src} alt="" className="h-full w-full object-cover" />
@@ -116,7 +107,7 @@ function Gallery({ images, title }) {
         ))}
       </div>
 
-      <div className="flex-1 overflow-hidden" style={{ backgroundColor: BLUSH }}>
+      <div className="bg-blush flex-1 overflow-hidden transition-colors duration-300">
         <img
           src={images[active]}
           alt={title}
@@ -133,25 +124,23 @@ function Gallery({ images, title }) {
 
 function QuantityStepper({ quantity, setQuantity, min, max }) {
   return (
-    <div className="inline-flex items-center" style={{ border: `1px solid ${HAIR}` }}>
+    <div className="border-hair inline-flex items-center border transition-colors duration-300">
       <button
         type="button"
         aria-label="Decrease quantity"
         onClick={() => setQuantity((q) => Math.max(min, q - 1))}
-        className="flex h-11 w-10 items-center justify-center disabled:opacity-30"
+        className="text-ink flex h-11 w-10 items-center justify-center disabled:opacity-30 cursor-pointer"
         disabled={quantity <= min}
-        style={{ color: INK }}
       >
         <Minus className="h-3.5 w-3.5" strokeWidth={1.5} />
       </button>
-      <span className="w-10 text-center text-[14px]" style={{ color: INK }}>{quantity}</span>
+      <span className="text-ink w-10 text-center text-[14px]">{quantity}</span>
       <button
         type="button"
         aria-label="Increase quantity"
         onClick={() => setQuantity((q) => Math.min(max, q + 1))}
-        className="flex h-11 w-10 items-center justify-center disabled:opacity-30"
+        className="text-ink flex h-11 w-10 items-center justify-center disabled:opacity-30 cursor-pointer"
         disabled={quantity >= max}
-        style={{ color: INK }}
       >
         <Plus className="h-3.5 w-3.5" strokeWidth={1.5} />
       </button>
@@ -166,21 +155,21 @@ function QuantityStepper({ quantity, setQuantity, min, max }) {
 function AccordionItem({ title, children, defaultOpen = false }) {
   const [open, setOpen] = useState(defaultOpen);
   return (
-    <div style={{ borderBottom: `1px solid ${HAIR}` }}>
+    <div className="border-b border-hair transition-colors duration-300">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between py-4 text-left text-[13px] font-medium uppercase tracking-[0.08em]"
-        style={{ color: INK }}
+        className="text-ink flex w-full items-center justify-between py-4 text-left text-[13px] font-medium uppercase tracking-[0.08em] cursor-pointer"
         aria-expanded={open}
       >
         {title}
         <ChevronDown
-          className="h-4 w-4 transition-transform duration-200"
+          className={`text-stone h-4 w-4 transition-transform duration-200 ${
+            open ? "rotate-180" : "rotate-0"
+          }`}
           strokeWidth={1.5}
-          style={{ transform: open ? "rotate(180deg)" : "rotate(0deg)", color: STONE }}
         />
       </button>
-      {open && <div className="pb-4 text-[13.5px] leading-relaxed" style={{ color: STONE }}>{children}</div>}
+      {open && <div className="text-stone pb-4 text-[13.5px] leading-relaxed transition-colors duration-300">{children}</div>}
     </div>
   );
 }
@@ -208,29 +197,29 @@ function Details({ product }) {
   return (
     <div>
       {brand && (
-        <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em]" style={{ color: STONE }}>
+        <p className="text-stone mb-2 text-[11px] font-semibold uppercase tracking-[0.18em]">
           {brand}
         </p>
       )}
 
-      <h1 className="mb-3 text-[34px] leading-tight sm:text-[40px]" style={{ fontFamily: DISPLAY_FONT, color: INK }}>
+      <h1 className="font-display text-ink mb-3 text-[34px] leading-tight sm:text-[40px]">
         {title}
       </h1>
 
       <div className="mb-4 flex items-center gap-3">
         <Stars rating={rating} />
-        <a href="#reviews" className="text-[12.5px]" style={{ color: STONE }}>
+        <a href="#reviews" className="text-stone text-[12.5px] hover:text-rose transition-colors duration-300">
           {rating?.toFixed(2)} · {reviews.length} review{reviews.length === 1 ? "" : "s"}
         </a>
       </div>
 
       <div className="mb-5 flex flex-wrap items-center gap-3">
-        <span className="text-[28px]" style={{ fontFamily: DISPLAY_FONT, color: INK }}>
+        <span className="font-display text-ink text-[28px]">
           ${discountedPrice.toFixed(2)}
         </span>
         {hasDiscount && (
           <>
-            <span className="text-[16px] line-through" style={{ color: STONE }}>
+            <span className="text-stone text-[16px] line-through">
               ${price.toFixed(2)}
             </span>
             <RibbonTag>Save {Math.round(discountPercentage)}%</RibbonTag>
@@ -238,7 +227,7 @@ function Details({ product }) {
         )}
       </div>
 
-      <p className="mb-6 max-w-md text-[14.5px] leading-relaxed" style={{ color: STONE }}>
+      <p className="text-stone mb-6 max-w-md text-[14.5px] leading-relaxed">
         {description}
       </p>
 
@@ -253,10 +242,9 @@ function Details({ product }) {
           type="button"
           disabled={isOut}
           onClick={() => setAdded(true)}
-          className="flex flex-1 items-center justify-center gap-2 px-8 py-3.5 text-[12.5px] font-medium uppercase tracking-[0.12em] text-white transition-colors disabled:cursor-not-allowed disabled:opacity-40 sm:flex-initial"
-          style={{ backgroundColor: added ? "#5F7A5A" : INK }}
-          onMouseEnter={(e) => { if (!e.currentTarget.disabled && !added) e.currentTarget.style.backgroundColor = ROSE_DARK; }}
-          onMouseLeave={(e) => { if (!added) e.currentTarget.style.backgroundColor = INK; }}
+          className={`flex flex-1 items-center justify-center gap-2 px-8 py-3.5 text-[12.5px] font-medium uppercase tracking-[0.12em] text-white transition-colors duration-300 disabled:cursor-not-allowed disabled:opacity-40 sm:flex-initial cursor-pointer ${
+            added ? "bg-stock-in" : "bg-ink hover:bg-rose-dark"
+          }`}
         >
           <ShoppingBag className="h-4 w-4" strokeWidth={1.5} />
           {added ? "Added to bag" : "Add to bag"}
@@ -267,35 +255,39 @@ function Details({ product }) {
           onClick={() => setLiked((v) => !v)}
           aria-pressed={liked}
           aria-label="Add to wishlist"
-          className="flex h-11.5 w-11.5 shrink-0 items-center justify-center"
-          style={{ border: `1px solid ${HAIR}` }}
+          className="border-hair flex h-11.5 w-11.5 shrink-0 items-center justify-center border transition-all duration-300 cursor-pointer"
         >
-          <Heart className="h-4.5 w-4.5" strokeWidth={1.5} fill={liked ? ROSE : "none"} style={{ color: liked ? ROSE : INK }} />
+          <Heart
+            className={`h-4.5 w-4.5 transition-colors ${
+              liked ? "fill-rose text-rose" : "fill-none text-ink"
+            }`}
+            strokeWidth={1.5}
+          />
         </button>
       </div>
 
       {minimumOrderQuantity > 1 && (
-        <p className="mb-6 text-[12px]" style={{ color: STONE }}>
+        <p className="text-stone mb-6 text-[12px]">
           Minimum order quantity: {minimumOrderQuantity} units
         </p>
       )}
 
       <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <div className="flex items-center gap-2 text-[12px]" style={{ color: STONE }}>
-          <Truck className="h-4 w-4 shrink-0" strokeWidth={1.5} style={{ color: ROSE }} />
+        <div className="text-stone flex items-center gap-2 text-[12px]">
+          <Truck className="text-rose h-4 w-4 shrink-0" strokeWidth={1.5} />
           {shippingInformation}
         </div>
-        <div className="flex items-center gap-2 text-[12px]" style={{ color: STONE }}>
-          <ShieldCheck className="h-4 w-4 shrink-0" strokeWidth={1.5} style={{ color: ROSE }} />
+        <div className="text-stone flex items-center gap-2 text-[12px]">
+          <ShieldCheck className="text-rose h-4 w-4 shrink-0" strokeWidth={1.5} />
           {warrantyInformation}
         </div>
-        <div className="flex items-center gap-2 text-[12px]" style={{ color: STONE }}>
-          <RotateCcw className="h-4 w-4 shrink-0" strokeWidth={1.5} style={{ color: ROSE }} />
+        <div className="text-stone flex items-center gap-2 text-[12px]">
+          <RotateCcw className="text-rose h-4 w-4 shrink-0" strokeWidth={1.5} />
           {returnPolicy}
         </div>
       </div>
 
-      <div style={{ borderTop: `1px solid ${HAIR}` }}>
+      <div className="border-t border-hair transition-colors duration-300">
         <AccordionItem title="Product details" defaultOpen>
           <ul className="space-y-1">
             <li>SKU: {sku}</li>
@@ -333,7 +325,7 @@ function ReviewsAndDescription({ product }) {
 
   return (
     <section id="reviews" className="mx-auto max-w-7xl px-6 py-16 lg:px-10 lg:py-20">
-      <div className="mb-8 flex gap-8" style={{ borderBottom: `1px solid ${HAIR}` }}>
+      <div className="border-b border-hair mb-8 flex gap-8 transition-colors duration-300">
         {[
           { key: "description", label: "Description" },
           { key: "reviews", label: `Reviews (${reviews.length})` },
@@ -341,11 +333,9 @@ function ReviewsAndDescription({ product }) {
           <button
             key={t.key}
             onClick={() => setTab(t.key)}
-            className="pb-3 text-[13px] font-medium uppercase tracking transition-colors"
-            style={{
-              color: tab === t.key ? INK : STONE,
-              borderBottom: tab === t.key ? `2px solid ${ROSE}` : "2px solid transparent",
-            }}
+            className={`pb-3 text-[13px] font-medium uppercase tracking transition-colors border-b-2 cursor-pointer ${
+              tab === t.key ? "text-ink border-rose" : "text-stone border-transparent"
+            }`}
           >
             {t.label}
           </button>
@@ -354,7 +344,7 @@ function ReviewsAndDescription({ product }) {
 
       {tab === "description" ? (
         <div className="max-w-2xl">
-          <p className="mb-6 text-[15px] leading-relaxed" style={{ color: INK }}>
+          <p className="text-ink mb-6 text-[15px] leading-relaxed">
             {description}
           </p>
           {tags.length > 0 && (
@@ -362,8 +352,7 @@ function ReviewsAndDescription({ product }) {
               {tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 text-[11.5px] capitalize tracking-[0.06em]"
-                  style={{ backgroundColor: BLUSH, color: INK }}
+                  className="bg-blush text-ink px-3 py-1 text-[11.5px] capitalize tracking-[0.06em] transition-colors duration-300"
                 >
                   {tag}
                 </span>
@@ -374,12 +363,12 @@ function ReviewsAndDescription({ product }) {
       ) : (
         <div className="max-w-2xl">
           <div className="mb-8 flex items-center gap-4">
-            <span className="text-[42px] leading-none" style={{ fontFamily: DISPLAY_FONT, color: INK }}>
+            <span className="font-display text-ink text-[42px] leading-none">
               {rating?.toFixed(1)}
             </span>
             <div>
               <Stars rating={rating} size="h-4 w-4" />
-              <p className="mt-1 text-[12.5px]" style={{ color: STONE }}>
+              <p className="text-stone mt-1 text-[12.5px]">
                 Based on {reviews.length} review{reviews.length === 1 ? "" : "s"}
               </p>
             </div>
@@ -387,15 +376,15 @@ function ReviewsAndDescription({ product }) {
 
           <div className="space-y-6">
             {reviews.map((r, i) => (
-              <div key={i} className="pb-6" style={{ borderBottom: i < reviews.length - 1 ? `1px solid ${HAIR}` : "none" }}>
+              <div key={i} className={`pb-6 transition-colors duration-300 ${i < reviews.length - 1 ? "border-b border-hair" : ""}`}>
                 <div className="mb-1.5 flex items-center justify-between">
-                  <p className="text-[13.5px] font-medium" style={{ color: INK }}>{r.reviewerName}</p>
-                  <span className="text-[11.5px]" style={{ color: STONE }}>{formatDate(r.date)}</span>
+                  <p className="text-ink text-[13.5px] font-medium">{r.reviewerName}</p>
+                  <span className="text-stone text-[11.5px]">{formatDate(r.date)}</span>
                 </div>
                 <div className="mb-2">
                   <Stars rating={r.rating} />
                 </div>
-                <p className="text-[13.5px] leading-relaxed" style={{ color: STONE }}>{r.comment}</p>
+                <p className="text-stone text-[13.5px] leading-relaxed">{r.comment}</p>
               </div>
             ))}
           </div>
@@ -415,7 +404,7 @@ function RelatedProductCard({ product }) {
 
   return (
     <Link to={`/products/${product.id}`} className="group block">
-      <div className="relative aspect-4/5 overflow-hidden" style={{ backgroundColor: BLUSH }}>
+      <div className="bg-blush relative aspect-4/5 overflow-hidden transition-colors duration-300">
         <img
           src={product.thumbnail}
           alt={product.title}
@@ -427,18 +416,18 @@ function RelatedProductCard({ product }) {
           </div>
         )}
       </div>
-      <p className="mb-1 mt-3 text-[10.5px] font-semibold uppercase tracking-[0.14em]" style={{ color: STONE }}>
+      <p className="text-stone mb-1 mt-3 text-[10.5px] font-semibold uppercase tracking-[0.14em]">
         {product.brand}
       </p>
-      <p className="mb-1.5 text-[16.5px] leading-snug" style={{ fontFamily: DISPLAY_FONT, color: INK }}>
+      <p className="font-display text-ink mb-1.5 text-[16.5px] leading-snug">
         {product.title}
       </p>
       <div className="flex items-baseline gap-2">
-        <span className="text-[15px]" style={{ fontFamily: DISPLAY_FONT, color: INK }}>
+        <span className="font-display text-ink text-[15px]">
           ${discounted.toFixed(2)}
         </span>
         {hasDiscount && (
-          <span className="text-[12px] line-through" style={{ color: STONE }}>
+          <span className="text-stone text-[12px] line-through">
             ${product.price.toFixed(2)}
           </span>
         )}
@@ -450,18 +439,18 @@ function RelatedProductCard({ product }) {
 function RelatedProducts({ items }) {
   if (!items?.length) return null;
   return (
-    <section className="py-16 lg:py-20" style={{ backgroundColor: BLUSH }}>
+    <section className="bg-blush py-16 lg:py-20 transition-colors duration-300">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="mb-10 flex items-end justify-between">
           <div>
-            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.22em]" style={{ color: ROSE }}>
+            <p className="text-rose mb-3 text-[11px] font-semibold uppercase tracking-[0.22em]">
               Complete the routine
             </p>
-            <h2 className="text-[30px] leading-tight" style={{ fontFamily: DISPLAY_FONT, color: INK }}>
+            <h2 className="font-display text-ink text-[30px] leading-tight">
               You may also like
             </h2>
           </div>
-          <Link to="/products" className="hidden text-[12.5px] font-medium uppercase tracking sm:inline-flex sm:items-center sm:gap-1" style={{ color: ROSE }}>
+          <Link to="/products" className="text-rose hover:text-rose-dark hidden text-[12.5px] font-medium uppercase tracking sm:inline-flex sm:items-center sm:gap-1 transition-colors duration-300">
             Shop all <ArrowRight className="h-3.5 w-3.5" strokeWidth={1.5} />
           </Link>
         </div>
@@ -481,26 +470,26 @@ function RelatedProducts({ items }) {
 
 function Skeleton() {
   return (
-    <div style={{ backgroundColor: CREAM }}>
+    <div className="bg-cream transition-colors duration-300">
       <section className="mx-auto max-w-7xl animate-pulse px-6 py-8 lg:px-10 lg:py-12">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-16">
           <div className="flex gap-4">
             <div className="hidden flex-col gap-3 sm:flex">
               {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="h-20 w-16" style={{ backgroundColor: HAIR }} />
+                <div key={i} className="bg-hair h-20 w-16 transition-colors duration-300" />
               ))}
             </div>
-            <div className="aspect-4/5 flex-1" style={{ backgroundColor: BLUSH }} />
+            <div className="bg-blush aspect-4/5 flex-1 transition-colors duration-300" />
           </div>
           <div>
-            <div className="mb-3 h-3 w-20" style={{ backgroundColor: HAIR }} />
-            <div className="mb-4 h-9 w-3/4" style={{ backgroundColor: HAIR }} />
-            <div className="mb-6 h-4 w-40" style={{ backgroundColor: HAIR }} />
-            <div className="mb-6 h-8 w-32" style={{ backgroundColor: HAIR }} />
-            <div className="mb-2 h-3 w-full" style={{ backgroundColor: HAIR }} />
-            <div className="mb-2 h-3 w-full" style={{ backgroundColor: HAIR }} />
-            <div className="mb-8 h-3 w-2/3" style={{ backgroundColor: HAIR }} />
-            <div className="h-12 w-full max-w-xs" style={{ backgroundColor: HAIR }} />
+            <div className="bg-hair mb-3 h-3 w-20 transition-colors duration-300" />
+            <div className="bg-hair mb-4 h-9 w-3/4 transition-colors duration-300" />
+            <div className="bg-hair mb-6 h-4 w-40 transition-colors duration-300" />
+            <div className="bg-hair mb-6 h-8 w-32 transition-colors duration-300" />
+            <div className="bg-hair mb-2 h-3 w-full transition-colors duration-300" />
+            <div className="bg-hair mb-2 h-3 w-full transition-colors duration-300" />
+            <div className="bg-hair mb-8 h-3 w-2/3 transition-colors duration-300" />
+            <div className="bg-hair h-12 w-full max-w-xs transition-colors duration-300" />
           </div>
         </div>
       </section>
@@ -514,27 +503,25 @@ function Skeleton() {
 
 function ErrorState({ onRetry }) {
   return (
-    <div style={{ backgroundColor: CREAM }}>
+    <div className="bg-cream transition-colors duration-300">
       <div className="mx-auto flex max-w-md flex-col items-center px-6 py-32 text-center">
-        <AlertCircle className="mb-4 h-8 w-8" strokeWidth={1.5} style={{ color: ROSE }} />
-        <h2 className="mb-2 text-[24px]" style={{ fontFamily: DISPLAY_FONT, color: INK }}>
+        <AlertCircle className="text-rose mb-4 h-8 w-8" strokeWidth={1.5} />
+        <h2 className="font-display text-ink mb-2 text-[24px]">
           We couldn't load this product
         </h2>
-        <p className="mb-7 text-[13.5px]" style={{ color: STONE }}>
+        <p className="text-stone mb-7 text-[13.5px]">
           Something went wrong fetching this item. It may no longer exist, or there was a connection issue.
         </p>
         <div className="flex gap-3">
           <button
             onClick={onRetry}
-            className="px-6 py-2.5 text-[12.5px] font-medium uppercase tracking text-white"
-            style={{ backgroundColor: INK }}
+            className="bg-ink hover:bg-rose-dark px-6 py-2.5 text-[12.5px] font-medium uppercase tracking text-white transition-colors duration-300 cursor-pointer"
           >
             Try again
           </button>
           <Link
             to="/products"
-            className="px-6 py-2.5 text-[12.5px] font-medium uppercase tracking"
-            style={{ border: `1px solid ${HAIR}`, color: INK }}
+            className="border-hair text-ink hover:text-rose px-6 py-2.5 text-[12.5px] font-medium uppercase tracking border transition-colors duration-300"
           >
             Back to shop
           </Link>
@@ -608,7 +595,7 @@ export default function ProductDetailPage() {
     product.images && product.images.length > 0 ? product.images : [product.thumbnail];
 
   return (
-    <div style={{ backgroundColor: CREAM }}>
+    <div className="bg-cream transition-colors duration-300">
       <Breadcrumb category={product.category} title={product.title} />
 
       <section className="mx-auto max-w-7xl px-6 py-8 lg:px-10 lg:py-12">
