@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router";
 import "./index.css";
 import Products from "./Pages/Products.jsx";
-import Lyout from "./components/layout.jsx";
+import Layout from "./components/layout.jsx";
 import HomePage from "./Pages/HomePage.jsx";
 import ProductDetailPage from "./Pages/ProductDetailPage.jsx";
 import {ThemeContextProvider} from "./contexts/ThemeContextProvider.jsx";
@@ -13,7 +13,7 @@ createRoot(document.getElementById("root")).render(
     <ThemeContextProvider>
       <BrowserRouter>
         <Routes>
-          <Route element={<Lyout />}>
+          <Route element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path="products">
               <Route index element={<Products />} />

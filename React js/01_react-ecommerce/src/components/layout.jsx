@@ -1,16 +1,21 @@
-import React from 'react'
-import { Outlet } from 'react-router'
-import Header from './common/header.jsx'
-import Footer from './common/footer.jsx'
+import { Outlet } from "react-router";
+import Header from "./common/header.jsx";
+import Footer from "./common/footer.jsx";
 
-const Lyout = () => {
+/**
+ * Layout — root page shell with sticky header, main content area, and footer.
+ * All page routes are rendered via the <Outlet />.
+ */
+const Layout = () => {
   return (
     <div className="bg-cream min-h-screen text-ink transition-colors duration-300">
-        <Header />
+      <Header />
+      <main id="main-content">
         <Outlet />
-        <Footer />
+      </main>
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Lyout
+export default Layout;
