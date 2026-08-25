@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router";
-import { Search, ShoppingBag, Menu, X } from "lucide-react";
+import { ShoppingBag, Menu, X } from "lucide-react";
 import ThemeToggle from "./themeToggle.jsx";
+import Search from "./Search.jsx";
 
 function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -49,12 +50,7 @@ function Header() {
 
         {/* Icons */}
         <div className="flex items-center gap-4">
-          <button
-            aria-label="Search"
-            className="hidden h-5 w-5 items-center justify-center sm:flex text-ink hover:text-rose transition-colors duration-300 cursor-pointer"
-          >
-            <Search className="h-4.5 w-4.5" strokeWidth={1.5} />
-          </button>
+          <Search />
           <Link
             to="/products"
             aria-label="Bag"

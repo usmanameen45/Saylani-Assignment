@@ -12,7 +12,7 @@ export default function ThemeToggle() {
     >
       <Moon
         className={`absolute h-4.5 w-4.5 transition-all duration-500 ease-in-out transform ${
-          theme === "dark"
+          theme === "light"
             ? "rotate-0 scale-100 opacity-100"
             : "-rotate-90 scale-0 opacity-0"
         }`}
@@ -20,7 +20,7 @@ export default function ThemeToggle() {
       />
       <Sun
         className={`absolute h-4.5 w-4.5 transition-all duration-500 ease-in-out transform ${
-          theme === "light"
+          theme === "dark"
             ? "rotate-0 scale-100 opacity-100"
             : "rotate-90 scale-0 opacity-0"
         }`}
