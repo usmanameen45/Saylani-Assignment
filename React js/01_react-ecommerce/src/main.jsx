@@ -7,6 +7,7 @@ import Layout from "./components/layout.jsx";
 import HomePage from "./Pages/HomePage.jsx";
 import ProductDetailPage from "./Pages/ProductDetailPage.jsx";
 import {ThemeContextProvider} from "./contexts/ThemeContextProvider.jsx";
+import SearchPage from "./Pages/Search.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -19,6 +20,7 @@ createRoot(document.getElementById("root")).render(
               <Route index element={<Products />} />
               <Route path=":id" element={<ProductDetailPage />} />
             </Route>
+            <Route path="search" element={<SearchPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

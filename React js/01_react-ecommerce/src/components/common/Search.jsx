@@ -51,7 +51,7 @@ const Search = () => {
             transition={{ duration: 0.25 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-stone/50"
           >
-            <div className="flex flex-col gap-6 rounded-lg bg-cream px-6 py-4 sm:w-1/2 mx-[16px]">
+            <div className="flex flex-col gap-6 rounded-lg bg-cream px-6 py-4 w-full max-w-[500px] mx-[16px]">
               <button
                 onClick={() => {
                   setisDialogOpen(false);
@@ -73,10 +73,10 @@ const Search = () => {
               {loading ? (
                 <p className="text-ink text-center">Loading...</p>
               ) : products.length > 0 ? (
-                <div className="max-h-[200px] flex flex-col gap-1 overflow-y-auto">
+                <div className="flex flex-col gap-2">
                   {products.map(
                     (product, index) =>
-                      index < 5 && (
+                      index < 3 && (
                         <div
                           key={product.id}
                           onClick={() => {
@@ -126,7 +126,13 @@ const Search = () => {
                 <p>No products found</p>
               )}
               {!loading && products.length > 5 && (
-                <button className="text-ink hover:text-rose self-end transition-colors duration-300 cursor-pointer">
+                <button
+                  onClick={() => {
+                    setisDialogOpen(false);
+                    navigate(`/search?q=${query}`);
+                  }} 
+                  className="flex w-full items-center justify-center rounded-lg py-2.5 text-[12.5px] font-medium uppercase tracking-[0.12em] text-cream bg-ink hover:bg-rose-dark transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-40 cursor-pointer"
+                >
                   {`View all ${products.length} results for "${query}"`}
                 </button>
               )}
