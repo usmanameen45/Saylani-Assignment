@@ -38,7 +38,7 @@ const Search = () => {
       <button
         aria-label="Search"
         onClick={() => setisDialogOpen(true)}
-        className="hidden h-5 w-5 items-center justify-center sm:flex text-ink hover:text-rose transition-colors duration-300 cursor-pointer"
+        className="h-5 w-5 items-center justify-center flex text-ink hover:text-rose transition-colors duration-300 cursor-pointer"
       >
         <SearchIcon className="h-4.5 w-4.5" strokeWidth={1.5} />
       </button>
